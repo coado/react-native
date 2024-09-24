@@ -1001,11 +1001,32 @@ public class ReactHostImpl implements ReactHost {
                 raiseSoftException(method, "Execute: reactInstance is null. Dropping work.");
                 return null;
               }
-
               runnable.then(reactInstance);
               return null;
             },
             executor)
+        .continueWithTask(
+          task -> {
+            final BridgelessReactContext reactContext = getOrCreateReactContext();
+            ReactInstanceEventListener[] instanceEventListeners;
+
+            synchronized (mReactInstanceEventListeners) {
+              instanceEventListeners =
+                mReactInstanceEventListeners.toArray(new ReactInstanceEventListener[0]);
+            }
+
+            reactContext.runOnJSQueueThread(
+              () -> {
+                for (ReactInstanceEventListener listener : instanceEventListeners) {
+                  if (listener != null) {
+                    listener.onReactContextInitialized(reactContext);
+                  }
+                }
+              }
+            );
+            return null;
+          }
+        )
         .continueWith(
             task -> {
               if (task.isFaulted()) {
@@ -1189,16 +1210,6 @@ public class ReactHostImpl implements ReactHost {
                 }
 
                 log(method, "Executing ReactInstanceEventListeners");
-                ReactInstanceEventListener[] instanceEventListeners;
-                synchronized (mReactInstanceEventListeners) {
-                  instanceEventListeners =
-                      mReactInstanceEventListeners.toArray(new ReactInstanceEventListener[0]);
-                }
-                for (ReactInstanceEventListener listener : instanceEventListeners) {
-                  if (listener != null) {
-                    listener.onReactContextInitialized(reactContext);
-                  }
-                }
                 return reactInstance;
               };
 
