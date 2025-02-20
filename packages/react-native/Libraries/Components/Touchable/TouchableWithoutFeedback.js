@@ -19,8 +19,8 @@ import type {EdgeInsetsOrSizeProp} from '../../StyleSheet/EdgeInsetsPropType';
 import type {
   BlurEvent,
   FocusEvent,
-  LayoutChangeEvent,
   GestureResponderEvent,
+  LayoutChangeEvent,
 } from '../../Types/CoreEventTypes';
 
 import View from '../../Components/View/View';

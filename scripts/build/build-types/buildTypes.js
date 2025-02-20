@@ -57,6 +57,7 @@ const ENTRY_POINTS = [
   'packages/react-native/Libraries/PermissionsAndroid/PermissionsAndroid.js',
   'packages/react-native/Libraries/PushNotificationIOS/PushNotificationIOS.js',
   'packages/react-native/Libraries/Modal/Modal.js',
+  'packages/react-native/Libraries/Components/Touchable/Touchable.js',
 ];
 
 /**
