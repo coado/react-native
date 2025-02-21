@@ -30,6 +30,11 @@ import typeof * as ReactNativePublicAPI from './index.js.flow';
 const warnOnce = require('./Libraries/Utilities/warnOnce').default;
 const invariant = require('invariant');
 
+/// <reference path="src/types/global.d.ts" />
+/// <reference path="src/types/globals.d.ts" />
+
+export type {HostComponent, HostInstance};
+
 module.exports = {
   get registerCallableModule() {
     return require('./Libraries/Core/registerCallableModule').default;
