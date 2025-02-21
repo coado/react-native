@@ -51,7 +51,7 @@
 //                 Mateusz Wit <https://github.com/MateWW>
 //                 Saad Najmi <https://github.com/saadnajmi>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 4.8
+// Minimum TypeScript Version: 4.9
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -68,8 +68,8 @@
 /// <reference path="modules/BatchedBridge.d.ts" />
 /// <reference path="modules/Codegen.d.ts" />
 /// <reference path="modules/Devtools.d.ts" />
-/// <reference path="../src/types/global.d.ts" />
-/// <reference path="../src/types/globals.d.ts" />
+/// <reference types="../src/types/global.d.ts" />
+/// <reference types="../src/types/globals.d.ts" />
 /// <reference path="modules/LaunchScreen.d.ts" />
 
 export * from '../Libraries/ActionSheetIOS/ActionSheetIOS';
