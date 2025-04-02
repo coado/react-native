@@ -22,7 +22,7 @@ ${diff}
 
 async function getDiff(filePath = FILE_PATH) {
     try {
-        const diff = execSync(`git diff -- ${filePath}`, {
+        const diff = execSync(`git diff HEAD^..HEAD -- ${filePath}`, {
             encoding: 'utf-8'
         });
         return diff;
@@ -34,7 +34,7 @@ async function getDiff(filePath = FILE_PATH) {
 
 function hasFileChanged(filePath = FILE_PATH) {
     try {
-        const changedFiles = execSync(`git diff --name-only`, {
+        const changedFiles = execSync(`git diff --name-only HEAD^..HEAD`, {
             encoding: 'utf-8'
         }).split('\n');
         return changedFiles.includes(filePath);
@@ -71,9 +71,10 @@ async function main() {
     }
 
     const diff = await getDiff();
-    const context = getContext(diff);
-    const response = await callOllama(context);
-    console.log(response);
+    console.log(diff);
+    // const context = getContext(diff);
+    // const response = await callOllama(context);
+    // console.log(response);
 }
 
 main().catch(console.error);

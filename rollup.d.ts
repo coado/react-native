@@ -1748,7 +1748,7 @@ export declare type ModalProps = ModalBaseProps &
 export declare interface ModalPropsAndroid {
   hardwareAccelerated?: boolean | undefined;
   statusBarTranslucent?: boolean | undefined;
-  navigationBarTranslucent?: boolean | undefined;
+  navigationBarTranslucent?: boolean;
 }
 export declare interface ModalPropsIOS {
   presentationStyle?:
