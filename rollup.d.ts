@@ -2981,7 +2981,7 @@ export declare interface StyleSheetProperties {
   hairlineWidth: number;
   flatten<T extends string>(style: T): T;
 }
-export declare type SubmitBehavior = 'submit' | 'blurAndSubmit' | 'newline';
+export declare type SubmitBehavior = 'submit' | 'blurAndSubmit';
 export declare interface SubscribableMixin {
   addListenerOn(
     eventEmitter: any,
