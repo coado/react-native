@@ -44,7 +44,8 @@ export declare type AccessibilityChangeEventName =
   | 'highTextContrastChanged' // Android-only Event
   | 'darkerSystemColorsChanged' // iOS-only Event
   | 'screenReaderChanged'
-  | 'reduceTransparencyChanged';
+  | 'reduceTransparencyChanged'
+  | 'new event name'
 export declare type AccessibilityEventTypes =
   | 'click'
   | 'focus'
