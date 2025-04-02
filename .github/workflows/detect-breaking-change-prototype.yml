@@ -18,6 +18,8 @@ jobs:
       - name: Start Ollama with Mistral
         run: |
           docker run -d -p 11434:11434 --name ollama ollama/ollama
-          docker exec ollama ollama pull mistral:7b
+          docker exec ollama ollama pull mistral:7b || echo "Pull failed, proceeding anyway"
       - name: Run Breaking Change Check
-        run: node check_breaking_changes.js
+        run: node ./scripts/diff-ollama-prototype.js
+      - name: Stop Ollama
+        run: docker stop ollama
