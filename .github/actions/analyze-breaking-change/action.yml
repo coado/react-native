@@ -1,6 +1,6 @@
 name: Check Breaking Changes with Ollama
 on:
-  pull_request:
+  push:
     branches: [diff-prototype]
 jobs:
   analyze:
