@@ -1,0 +1,23 @@
+name: Check Breaking Changes with Ollama
+on:
+  pull_request:
+    branches: [diff-prototype]
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: Install Dependencies
+        run: npm install axios dotenv
+      - name: Start Ollama with Mistral
+        run: |
+          docker run -d -p 11434:11434 --name ollama ollama/ollama
+          docker exec ollama ollama pull mistral:7b
+      - name: Run Breaking Change Check
+        run: node check_breaking_changes.js
