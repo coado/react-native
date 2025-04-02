@@ -112,6 +112,7 @@
     "react-is": "19.0.0"
   },
   "dependencies": {
+    "@google/genai": "^0.7.0",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7"
   }

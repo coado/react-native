@@ -1,6 +1,9 @@
 require("dotenv").config();
 const { exec, execSync } = require('child_process');
 const axios = require("axios");
+const { GoogleGenAI } = require('@google/genai');
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 const FILE_PATH = 'rollup.d.ts'
@@ -46,23 +49,12 @@ function hasFileChanged(filePath = FILE_PATH) {
 
 async function callGemini(context) {
     const url = `${GEMINI_API_URL}?key=${process.env.GEMINI_API_KEY}`;
-    const payload = {
-        contents: [
-            {
-                parts: [
-                    {
-                        text: context
-                    }
-                ]
-            }
-        ]
-    }
-
     try {
-        const response = await axios.post(url, payload, {
-            headers: { "Content-Type": "application/json" }
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.0-flash',
+            contents: context,
         })
-        return response.data.candidates[0].content.parts[0].text;
+        return response.text;
     } catch (error) {
         throw new Error(`API call failed: ${error}`)
     }

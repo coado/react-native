@@ -3826,4 +3826,3 @@ export declare type WrapperComponentProvider = (
   appParameters: any
 ) => React_2.ComponentType<any>;
 export * from '@react-native/virtualized-lists';
-export {};
