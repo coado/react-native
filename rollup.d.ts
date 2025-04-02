@@ -1748,7 +1748,7 @@ export declare type ModalProps = ModalBaseProps &
 export declare interface ModalPropsAndroid {
   hardwareAccelerated?: boolean | undefined;
   statusBarTranslucent?: boolean | undefined;
-  navigationBarTranslucent?: boolean;
+  navigationBarTranslucent?: boolean | undefined;
 }
 export declare interface ModalPropsIOS {
   presentationStyle?:
@@ -2981,7 +2981,7 @@ export declare interface StyleSheetProperties {
   hairlineWidth: number;
   flatten<T extends string>(style: T): T;
 }
-export declare type SubmitBehavior = 'submit' | 'blurAndSubmit';
+export declare type SubmitBehavior = 'submit' | 'blurAndSubmit' | 'newline';
 export declare interface SubscribableMixin {
   addListenerOn(
     eventEmitter: any,
@@ -3826,3 +3826,4 @@ export declare type WrapperComponentProvider = (
   appParameters: any
 ) => React_2.ComponentType<any>;
 export * from '@react-native/virtualized-lists';
+export {};

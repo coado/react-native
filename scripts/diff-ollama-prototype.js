@@ -71,10 +71,9 @@ async function main() {
     }
 
     const diff = await getDiff();
-    console.log(diff);
-    // const context = getContext(diff);
-    // const response = await callOllama(context);
-    // console.log(response);
+    const context = getContext(diff);
+    const response = await callOllama(context);
+    console.log(response);
 }
 
 main().catch(console.error);
