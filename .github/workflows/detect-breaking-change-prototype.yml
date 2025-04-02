@@ -10,11 +10,11 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
-      - name: Install Dependencies
-        run: npm install axios dotenv
+      - name: Install dependencies
+        uses: ./.github/actions/yarn-install
       - name: Start Ollama with Mistral
         run: |
           docker run -d -p 11434:11434 --name ollama ollama/ollama
