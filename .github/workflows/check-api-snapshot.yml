@@ -22,7 +22,7 @@ jobs:
       - name: Detect rollup changes
         id: check-diff
         run: |
-          ROLLUP_PATH=$(dirname "$0")/../../packages/react-native/types/rollup.d.ts
+          ROLLUP_PATH=$(dirname "$0")/packages/react-native/types/rollup.d.ts
           DIFF_OUTPUT=$(git diff HEAD^ HEAD -- $ROLLUP_PATH)
 
           echo $DIFF_OUTPUT
