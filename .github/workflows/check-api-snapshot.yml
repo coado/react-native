@@ -1,8 +1,6 @@
 name: Run API Breaking Change Detection
 
-on:
-  push:
-    branches: [snapshot-detection]
+on: push
 jobs:
   check-api-changes:
     runs-on: ubuntu-latest
