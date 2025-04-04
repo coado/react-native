@@ -13,35 +13,33 @@ const {REPO_ROOT} = require('../consts');
 const babel = require('@babel/core');
 const generate = require('@babel/generator').default;
 const {execSync} = require('child_process');
-const fs = require('fs');
 const path = require('path');
 
-const ROLLUP_PATH = path.join(REPO_ROOT, 'api-rollup.d.ts');
+const ROLLUP_PATH = 'packages/react-native/types/rollup.d.ts';
 const BREAKING = true;
 const NOT_BREAKING = false;
 
 async function detectBreakingChange() {
-  console.log('Checking if rollup has changed');
-  // const {oldRollup, newRollup} = getRollups();
+  const {previousRollup, currentRollup} = getRollups();
+  const previousRollupAST = babel.parseSync(previousRollup, {
+    plugins: ['@babel/plugin-syntax-typescript'],
+  });
+  const currentRollupAST = babel.parseSync(currentRollup, {
+    plugins: ['@babel/plugin-syntax-typescript'],
+  });
 
-//   const oldRollupAST = babel.parseSync(oldRollup, {
-//     plugins: ['@babel/plugin-syntax-typescript'],
-//   });
-//   const newRollupAST = babel.parseSync(newRollup, {
-//     plugins: ['@babel/plugin-syntax-typescript'],
-//   });
-
-//   const oldStatements = oldRollupAST.program.body;
-//   const newStatements = newRollupAST.program.body;
-//   analyzeStatements(oldStatements, newStatements);
+  const prevoiusStatements = previousRollupAST.program.body;
+  const currentStatements = currentRollupAST.program.body;
+  const result = analyzeStatements(prevoiusStatements, currentStatements);
+  console.log(`IS BREAKING: ${result}`)
 }
 
 function analyzeStatements(
-  oldStatements: Array<BabelNodeStatement>,
-  newStatements: Array<BabelNodeStatement>,
+  prevoiusStatements: Array<BabelNodeStatement>,
+  currentStatements: Array<BabelNodeStatement>,
 ): boolean {
   const cache = {
-    old: {
+    previous: {
       internal: [],
       external: [],
     },
@@ -50,7 +48,7 @@ function analyzeStatements(
       external: [],
     },
   } as {
-    old: {
+    previous: {
       internal: Array<BabelNodeExportNamedDeclaration>,
       external: Array<BabelNodeExportNamedDeclaration>,
     },
@@ -59,20 +57,20 @@ function analyzeStatements(
       external: Array<BabelNodeExportNamedDeclaration>,
     },
   };
-  //   let detectedNewStatements = false;
+  //   let detectedcurrentStatements = false;
 
   // ImportDeclaration should not have impact on the API
   // If the imported type is used, it will be compared in the next steps
-  const oldStatementsFiltered = oldStatements.filter(
+  const prevoiusStatementsFiltered = prevoiusStatements.filter(
     statement => statement.type !== 'ImportDeclaration',
   );
-  const newStatementsFiltered = newStatements.filter(
+  const currentStatementsFiltered = currentStatements.filter(
     statement => statement.type !== 'ImportDeclaration',
   );
 
-  //   if (newStatementsFiltered.length > oldStatementsFiltered.length) {
+  //   if (currentStatementsFiltered.length > prevoiusStatementsFiltered.length) {
   //     console.log('New statements found');
-  //     detectedNewStatements = true;
+  //     detectedcurrentStatements = true;
   //   }
 
   const categorize = (statements: any, mapping: any) => {
@@ -85,27 +83,27 @@ function analyzeStatements(
     });
   };
 
-  categorize(oldStatementsFiltered, cache.old);
-  categorize(newStatementsFiltered, cache.new);
+  categorize(prevoiusStatementsFiltered, cache.previous);
+  categorize(currentStatementsFiltered, cache.new);
 
-  if (cache.new.external.length < cache.old.external.length) {
+  if (cache.new.external.length < cache.previous.external.length) {
     console.log('External statements removed');
     return BREAKING;
   }
 
-  // Create mapping between old and new statements
-  type Pair = Map<'old' | 'new', BabelNodeExportNamedDeclaration>;
+  // Create mapping between previous and new statements
+  type Pair = Map<'previous' | 'new', BabelNodeExportNamedDeclaration>;
   const mapping: Array<[string, Pair]> = [];
-  const oldNodesMapping = getExportedNodesNames(cache.old.external);
+  const previousNodesMapping = getExportedNodesNames(cache.previous.external);
   const newNodesMapping = Object.fromEntries(
     getExportedNodesNames(cache.new.external),
   );
 
-  for (const [name, oldNode] of oldNodesMapping) {
+  for (const [name, previousNode] of previousNodesMapping) {
     if (newNodesMapping[name]) {
       const pairMap: Pair = new Map();
       pairMap.set('new', newNodesMapping[name]);
-      pairMap.set('old', oldNode);
+      pairMap.set('previous', previousNode);
       mapping.push([name, pairMap]);
     } else {
       // There is no statement of that name in new rollup which means that:
@@ -119,12 +117,12 @@ function analyzeStatements(
   // TODO: Check if paired statements are equal
   let isBreaking = false;
   for (const [name, pair] of mapping) {
-    const oldNode = pair.get('old');
+    const previousNode = pair.get('previous');
     const newNode = pair.get('new');
-    if (!oldNode || !newNode) {
+    if (!previousNode || !newNode) {
       throw new Error('Node in pair is undefined');
     }
-    const isDiff = didStatementChange(oldNode, newNode);
+    const isDiff = didStatementChange(previousNode, newNode);
     if (isDiff) {
       console.log(`Breaking change detected for ${name}`);
       isBreaking = true;
@@ -186,12 +184,12 @@ function getExportedNodeName(node: BabelNodeExportNamedDeclaration): string {
 }
 
 function didStatementChange(
-  oldAST: BabelNodeStatement,
+  previousAST: BabelNodeStatement,
   newAST: BabelNodeStatement,
 ) {
-  const oldCode = getMinifiedCode(oldAST);
+  const previousCode = getMinifiedCode(previousAST);
   const newCode = getMinifiedCode(newAST);
-  return oldCode !== newCode;
+  return previousCode !== newCode;
 }
 
 function getMinifiedCode(ast: BabelNodeStatement) {
@@ -201,23 +199,32 @@ function getMinifiedCode(ast: BabelNodeStatement) {
 }
 
 function getRollups() {
-  // TODO: Get rollups from the git diff
-  const oldRollupPath = path.join(__dirname, 'rollups/rollup_old.d.ts');
-  const newRollupPath = path.join(__dirname, 'rollups/rollup_new.d.ts');
-  const oldRollup = fs.readFileSync(oldRollupPath, 'utf8');
-  const newRollup = fs.readFileSync(newRollupPath, 'utf8');
-  return {oldRollup, newRollup};
-}
+  const commits = execSync('git log --format="%H" -n 2')
+    .toString()
+    .trim()
+    .split('\n');
+  if (commits.length < 2) {
+    console.error('Not enough commits');
+    return {previousRollup: '', currentRollup: ''}
+  }
 
-function hasRollupChanged() {
+  const currentCommit = commits[0];
+  const previousCommit = commits[1];
+  let previousRollup = '';
+  let currentRollup = '';
+
   try {
-    const stat = execSync(`git diff --shortstat ${ROLLUP_PATH}`, {
-      encoding: 'utf8',
-    });
-    console.log({stat});
+    previousRollup = execSync(
+      `git show ${previousCommit}:${ROLLUP_PATH}`,
+    ).toString();
+    currentRollup = execSync(
+      `git show ${currentCommit}:${ROLLUP_PATH}`,
+    ).toString();
   } catch (error) {
     console.error(error);
   }
+
+  return {previousRollup, currentRollup};
 }
 
 module.exports = detectBreakingChange;
