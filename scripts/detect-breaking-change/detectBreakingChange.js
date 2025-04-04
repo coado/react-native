@@ -222,6 +222,7 @@ function getRollups() {
     ).toString();
   } catch (error) {
     console.error(error);
+    return {previousRollup: '', currentRollup: ''}
   }
 
   return {previousRollup, currentRollup};
