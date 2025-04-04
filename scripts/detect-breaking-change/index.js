@@ -10,10 +10,10 @@
  */
 
 require('../babel-register').registerForScript();
-const detectBreakingChanges = require('./detectBreakingChanges');
+const detectBreakingChange = require('./detectBreakingChange');
 
 async function main() {
-  await detectBreakingChanges();
+  await detectBreakingChange();
 }
 
 main().catch(console.error);

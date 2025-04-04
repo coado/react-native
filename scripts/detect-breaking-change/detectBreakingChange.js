@@ -9,7 +9,7 @@
  * @oncall react_native
  */
 
-const {REPO_ROOT} = require('../../consts');
+const {REPO_ROOT} = require('../consts');
 const babel = require('@babel/core');
 const generate = require('@babel/generator').default;
 const {execSync} = require('child_process');
@@ -20,7 +20,7 @@ const ROLLUP_PATH = path.join(REPO_ROOT, 'api-rollup.d.ts');
 const BREAKING = true;
 const NOT_BREAKING = false;
 
-async function findBreakingChanges() {
+async function detectBreakingChange() {
   console.log('Checking if rollup has changed');
   // const {oldRollup, newRollup} = getRollups();
 
@@ -220,4 +220,4 @@ function hasRollupChanged() {
   }
 }
 
-module.exports = findBreakingChanges;
+module.exports = detectBreakingChange;

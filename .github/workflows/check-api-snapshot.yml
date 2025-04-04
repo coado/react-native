@@ -29,7 +29,7 @@ jobs:
               echo "Changes detected in rollup.d.ts"
               echo "exit_code=1" >> $GITHUB_OUTPUT
           fi
-  detect-braking-change:
+  detect-breaking-change:
     needs: check-api-changes
     if: needs.check-api-changes.outputs.has_changes == '1'
     runs-on: ubuntu-latest
