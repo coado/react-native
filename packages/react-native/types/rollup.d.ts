@@ -19,5 +19,3 @@ declare const stagger: (
     time: number,
     animations: Array<CompositeAnimation>
   ) => CompositeAnimation;
-
-export declare type Test = string;
