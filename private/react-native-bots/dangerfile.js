@@ -32,10 +32,11 @@ const includesSummary = body_contains('## summary', 'summary:');
 
 const snapshot_output = JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP, 'snapshot/output.json'), 'utf8'));
 if (snapshot_output && snapshot_output.result !== "NON_BREAKING") {
+  console.log({snapshot_output})
   const title = ':exclamation: Javascript API change detected';
   const idea =
-    'This PR commits an update to ReactNativeApi.d.ts, indicating a change to React Native&#39;s public JavaScript API.' +
-    'Please include a clear changelog message.' +
+    'This PR commits an update to ReactNativeApi.d.ts, indicating a change to React Native&#39;s public JavaScript API. ' +
+    'Please include a clear changelog message. ' +
     'This change will be subject to extra review.';
   fail(`${title} - <i>${idea}</i>`);
 }
