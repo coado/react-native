@@ -11,8 +11,7 @@ runs:
       shell: bash
       run: |
         mkdir ${{ runner.temp }}/snapshot
-        # git show HEAD^:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
-        echo "" > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
+        git show HEAD^:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
     - name: Run breaking change detection
       shell: bash
       run: |
