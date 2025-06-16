@@ -12,6 +12,7 @@
 
 const {danger, fail, warn} = require('danger');
 const fs = require('fs');
+const path = require('path');
 
 const body = danger.github.pr.body?.toLowerCase() ?? '';
 
