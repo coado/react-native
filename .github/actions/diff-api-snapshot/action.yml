@@ -7,15 +7,26 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Save previous snapshot
+    - name: Fetch snapshot from PR head
       shell: bash
       run: |
         mkdir ${{ runner.temp }}/snapshot
-        git show HEAD^:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
+        git fetch origin ${{ github.event.pull_request.head.sha }}
+        git show ${{ github.event.pull_request.head.sha }}:packages/react-native/ReactNativeApi.d.ts > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
+    - name: Debug snapshot
+      shell: bash
+      run: |
+        ls -l ${{ runner.temp }}/current-snapshot.d.ts
+        cat ${{ runner.temp }}/current-snapshot.d.ts
+    # - name: Save previous snapshot
+    #   shell: bash
+    #   run: |
+    #     mkdir ${{ runner.temp }}/snapshot
+    #     git show HEAD^:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
     - name: Run breaking change detection
       shell: bash
       run: |
         node ./scripts/diff-api-snapshot \
-        ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts \
         ${{ github.workspace }}/${{ inputs.snapshot-path }} \
+        ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts \
         > ${{ runner.temp }}/snapshot/output.json
