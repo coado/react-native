@@ -37,7 +37,7 @@ if (snapshot_output && snapshot_output.result !== "NON_BREAKING") {
     'This PR commits an update to ReactNativeApi.d.ts, indicating a change to React Native&#39;s public JavaScript API.' +
     'Please include a clear changelog message.' +
     'This change will be subject to extra review.' +
-    'Please make sure to add a Changelog to your PR description. ' +
+    'Please make sure to add a Changelog to your PR description.';
 
   fail(`${title} - <i>${idea}</i>`);
 }
