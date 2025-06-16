@@ -12,20 +12,8 @@ runs:
       run: |
         mkdir ${{ runner.temp }}/snapshot
         git fetch origin ${{ github.event.pull_request.head.sha }}
-        git show ${{ github.event.pull_request.head.sha }}:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
-    - name: Debug snapshot
-      shell: bash
-      run: |
-        ls -l ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
-        echo "Current snapshot:"
-        cat ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
-        echo "Previous snapshot:"
-        cat ${{ github.workspace }}/${{ inputs.snapshot-path }}
-    # - name: Save previous snapshot
-    #   shell: bash
-    #   run: |
-    #     mkdir ${{ runner.temp }}/snapshot
-    #     git show HEAD^:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
+        git show ${{ github.event.pull_request.head.sha }}:${{ inputs.snapshot-path }} > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts \
+          || echo "" > ${{ runner.temp }}/snapshot/ReactNativeApi.d.ts
     - name: Run breaking change detection
       shell: bash
       run: |
