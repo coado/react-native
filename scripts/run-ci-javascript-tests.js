@@ -35,6 +35,15 @@ function describe(message) {
 try {
   echo('Executing JavaScript tests');
 
+  describe('Test: Validate JS API snapshot');
+  if (exec(`${YARN_BINARY} run build-types --withSnapshot --validate`).code) {
+    echo(
+      'JS API snapshot validation failed. Please run `yarn build-types --withSnapshot` to update the snapshot.',
+    );
+    exitCode = 1;
+    throw Error(exitCode);
+  }
+
   describe('Test: feature flags codegen');
   if (exec(`${YARN_BINARY} run featureflags --verify-unchanged`).code) {
     echo('Failed to run featureflags check.');
@@ -52,15 +61,6 @@ try {
   describe('Test: No JS build artifacts');
   if (exec(`${YARN_BINARY} run build --validate`).code) {
     echo('Failed, there are build artifacts in this commit.');
-    exitCode = 1;
-    throw Error(exitCode);
-  }
-
-  describe('Test: Validate JS API snapshot');
-  if (exec(`${YARN_BINARY} run build-types --withSnapshot --validate`).code) {
-    echo(
-      'JS API snapshot validation failed. Please run `yarn build-types --withSnapshot` to update the snapshot.',
-    );
     exitCode = 1;
     throw Error(exitCode);
   }

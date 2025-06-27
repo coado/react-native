@@ -1,5 +1,5 @@
 
 export interface ReactNativeApi {
     foo: string,
-    bar: number,
+    // bar: number,
 }
