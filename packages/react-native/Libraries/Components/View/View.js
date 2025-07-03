@@ -29,6 +29,8 @@ export default component View(
 ) {
   const hasTextAncestor = use(TextAncestor);
 
+  console.log('test')
+
   let actualView;
   if (ReactNativeFeatureFlags.reduceDefaultPropsInView()) {
     const {
