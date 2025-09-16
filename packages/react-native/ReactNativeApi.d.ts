@@ -60,7 +60,7 @@ declare const $$AnimatedImplementation: {
   timing: typeof timingImpl
   unforkEvent: typeof unforkEventImpl
   Value: typeof AnimatedValue_default
-  ValueXY: typeof AnimatedValueXY_default
+  // ValueXY: typeof AnimatedValueXY_default
 }
 declare const $$AnimatedScrollView: typeof AnimatedScrollView_default
 declare const $$AnimatedSectionList: <ItemT = any, SectionT = any>(
