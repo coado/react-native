@@ -1,7 +1,7 @@
 name: Run Danger on PR
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, edited, reopened, synchronize]
 
 permissions:
@@ -15,7 +15,7 @@ permissions:
 jobs:
   danger:
     runs-on: ubuntu-latest
-    # if: github.repository == 'coado/react-native'
+    if: github.repository == 'facebook/react-native'
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
