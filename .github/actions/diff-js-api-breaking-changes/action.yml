@@ -17,6 +17,8 @@ runs:
       env:
         SCRATCH_DIR: ${{ runner.temp }}/diff-js-api-breaking-changes
       run: |
+        git diff --name-status | awk '{print $2}' | grep 'packages/react-native/ReactNativeApi.d.ts' || exit 0
+
         node ./scripts/js-api/diff-api-snapshot \
         ${{ github.workspace }}/packages/react-native/ReactNativeApi.d.ts  \
         $SCRATCH_DIR/ReactNativeApi-after.d.ts \
