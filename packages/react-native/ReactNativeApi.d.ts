@@ -36,23 +36,23 @@ declare const $$AnimatedImage: AnimatedComponentType<
   React.ComponentRef<typeof Image>
 >
 declare const $$AnimatedImplementation: {
-  // add: typeof addImpl
+  add: typeof addImpl
   attachNativeEvent: typeof attachNativeEventImpl
   Color: typeof AnimatedColor_default
   createAnimatedComponent: typeof createAnimatedComponent_default
   decay: typeof decayImpl
   delay: typeof delayImpl
   diffClamp: typeof diffClampImpl
-  divide: typeof divideImpl
-  event: typeof eventImpl
-  Event: typeof AnimatedEvent
-  forkEvent: typeof forkEventImpl
-  Interpolation: typeof AnimatedInterpolation_default
-  loop: typeof loopImpl
-  modulo: typeof moduloImpl
-  multiply: typeof multiplyImpl
-  Node: typeof AnimatedNode_default
-  parallel: typeof parallelImpl
+  // divide: typeof divideImpl
+  // event: typeof eventImpl
+  // Event: typeof AnimatedEvent
+  // forkEvent: typeof forkEventImpl
+  // Interpolation: typeof AnimatedInterpolation_default
+  // loop: typeof loopImpl
+  // modulo: typeof moduloImpl
+  // multiply: typeof multiplyImpl
+  // Node: typeof AnimatedNode_default
+  // parallel: typeof parallelImpl
   sequence: typeof sequenceImpl
   spring: typeof springImpl
   stagger: typeof staggerImpl
