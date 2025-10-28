@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<ef75a380b395d88cb0551d3a44d9961d>>
+ * @generated SignedSource<<412a865e975214a0d794985e48fbbe4b>>
  */
 
 /**
@@ -80,8 +80,6 @@ public object ReactNativeFeatureFlagsCxxInterop {
 
   @DoNotStrip @JvmStatic public external fun enableImagePrefetchingAndroid(): Boolean
 
-  @DoNotStrip @JvmStatic public external fun enableImagePrefetchingJNIBatchingAndroid(): Boolean
-
   @DoNotStrip @JvmStatic public external fun enableImagePrefetchingOnUiThreadAndroid(): Boolean
 
   @DoNotStrip @JvmStatic public external fun enableImmediateUpdateModeForContentOffsetChanges(): Boolean
@@ -121,6 +119,8 @@ public object ReactNativeFeatureFlagsCxxInterop {
   @DoNotStrip @JvmStatic public external fun enableViewRecyclingForText(): Boolean
 
   @DoNotStrip @JvmStatic public external fun enableViewRecyclingForView(): Boolean
+
+  @DoNotStrip @JvmStatic public external fun enableVirtualViewContainerStateExperimental(): Boolean
 
   @DoNotStrip @JvmStatic public external fun enableVirtualViewDebugFeatures(): Boolean
 

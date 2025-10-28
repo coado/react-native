@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<c601ddc9bd62282f8079d0cb3578675d>>
+ * @generated SignedSource<<7987eba84c39c6e8cb6494092a94790e>>
  */
 
 /**
@@ -75,8 +75,6 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun enableImagePrefetchingAndroid(): Boolean = false
 
-  override fun enableImagePrefetchingJNIBatchingAndroid(): Boolean = false
-
   override fun enableImagePrefetchingOnUiThreadAndroid(): Boolean = false
 
   override fun enableImmediateUpdateModeForContentOffsetChanges(): Boolean = false
@@ -116,6 +114,8 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
   override fun enableViewRecyclingForText(): Boolean = true
 
   override fun enableViewRecyclingForView(): Boolean = true
+
+  override fun enableVirtualViewContainerStateExperimental(): Boolean = false
 
   override fun enableVirtualViewDebugFeatures(): Boolean = false
 

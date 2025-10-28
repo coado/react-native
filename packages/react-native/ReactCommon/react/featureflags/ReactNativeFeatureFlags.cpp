@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<5fe8801a343267a840956183ca93c757>>
+ * @generated SignedSource<<0554340092d31b5431e201f570599ab5>>
  */
 
 /**
@@ -130,10 +130,6 @@ bool ReactNativeFeatureFlags::enableImagePrefetchingAndroid() {
   return getAccessor().enableImagePrefetchingAndroid();
 }
 
-bool ReactNativeFeatureFlags::enableImagePrefetchingJNIBatchingAndroid() {
-  return getAccessor().enableImagePrefetchingJNIBatchingAndroid();
-}
-
 bool ReactNativeFeatureFlags::enableImagePrefetchingOnUiThreadAndroid() {
   return getAccessor().enableImagePrefetchingOnUiThreadAndroid();
 }
@@ -212,6 +208,10 @@ bool ReactNativeFeatureFlags::enableViewRecyclingForText() {
 
 bool ReactNativeFeatureFlags::enableViewRecyclingForView() {
   return getAccessor().enableViewRecyclingForView();
+}
+
+bool ReactNativeFeatureFlags::enableVirtualViewContainerStateExperimental() {
+  return getAccessor().enableVirtualViewContainerStateExperimental();
 }
 
 bool ReactNativeFeatureFlags::enableVirtualViewDebugFeatures() {

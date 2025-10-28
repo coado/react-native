@@ -97,10 +97,10 @@ NativeAnimatedNodesManager::NativeAnimatedNodesManager(
 
 NativeAnimatedNodesManager::NativeAnimatedNodesManager(
     std::shared_ptr<UIManagerAnimationBackend> animationBackend) noexcept
-    : animationBackend_(std::move(animationBackend)) {}
+    : animationBackend_(animationBackend) {}
 
 NativeAnimatedNodesManager::~NativeAnimatedNodesManager() noexcept {
-  stopRenderCallbackIfNeeded();
+  stopRenderCallbackIfNeeded(true);
 }
 
 std::optional<double> NativeAnimatedNodesManager::getValue(Tag tag) noexcept {
@@ -491,7 +491,7 @@ void NativeAnimatedNodesManager::handleAnimatedEvent(
     // when there are no active animations. Calling
     // `startRenderCallbackIfNeeded` will call platform specific code to
     // register UI tick listener.
-    startRenderCallbackIfNeeded();
+    startRenderCallbackIfNeeded(false);
     // Calling startOnRenderCallback_ will register a UI tick listener.
     // The UI ticker listener will not be called until the next frame.
     // That's why, in case this is called from the UI thread, we need to
@@ -516,13 +516,14 @@ NativeAnimatedNodesManager::ensureEventEmitterListener() noexcept {
   return eventEmitterListener_;
 }
 
-void NativeAnimatedNodesManager::startRenderCallbackIfNeeded() {
+void NativeAnimatedNodesManager::startRenderCallbackIfNeeded(bool isAsync) {
   if (ReactNativeFeatureFlags::useSharedAnimatedBackend()) {
 #ifdef RN_USE_ANIMATION_BACKEND
-    if (auto animationBackend =
-            std::static_pointer_cast<AnimationBackend>(animationBackend_)) {
-      animationBackend->start(
-          [this](float /*f*/) { return pullAnimationMutations(); });
+    if (auto animationBackend = animationBackend_.lock()) {
+      std::static_pointer_cast<AnimationBackend>(animationBackend)
+          ->start(
+              [this](float /*f*/) { return pullAnimationMutations(); },
+              isAsync);
     }
 #endif
 
@@ -540,13 +541,16 @@ void NativeAnimatedNodesManager::startRenderCallbackIfNeeded() {
   }
 
   if (startOnRenderCallback_) {
-    startOnRenderCallback_([this]() { onRender(); });
+    startOnRenderCallback_(isAsync);
   }
 }
 
-void NativeAnimatedNodesManager::stopRenderCallbackIfNeeded() noexcept {
+void NativeAnimatedNodesManager::stopRenderCallbackIfNeeded(
+    bool isAsync) noexcept {
   if (ReactNativeFeatureFlags::useSharedAnimatedBackend()) {
-    animationBackend_->stop();
+    if (auto animationBackend = animationBackend_.lock()) {
+      animationBackend->stop(isAsync);
+    }
     return;
   }
   // When multiple threads reach this point, only one thread should call
@@ -557,7 +561,7 @@ void NativeAnimatedNodesManager::stopRenderCallbackIfNeeded() noexcept {
 
   if (isRenderCallbackStarted) {
     if (stopOnRenderCallback_) {
-      stopOnRenderCallback_();
+      stopOnRenderCallback_(isAsync);
     }
   }
 }
@@ -605,9 +609,10 @@ void NativeAnimatedNodesManager::updateNodes(
 #endif
         const auto connectedToFinishedAnimation =
             is_node_connected_to_finished_animation(node, nodeTag, false);
-        nodesQueue.emplace_back(NodesQueueItem{
-            .node = node,
-            .connectedToFinishedAnimation = connectedToFinishedAnimation});
+        nodesQueue.emplace_back(
+            NodesQueueItem{
+                .node = node,
+                .connectedToFinishedAnimation = connectedToFinishedAnimation});
       }
     }
   }
@@ -628,9 +633,10 @@ void NativeAnimatedNodesManager::updateNodes(
         const auto connectedToFinishedAnimation =
             is_node_connected_to_finished_animation(
                 child, childTag, nextNode.connectedToFinishedAnimation);
-        nodesQueue.emplace_back(NodesQueueItem{
-            .node = child,
-            .connectedToFinishedAnimation = connectedToFinishedAnimation});
+        nodesQueue.emplace_back(
+            NodesQueueItem{
+                .node = child,
+                .connectedToFinishedAnimation = connectedToFinishedAnimation});
       }
     }
   }
@@ -660,9 +666,10 @@ void NativeAnimatedNodesManager::updateNodes(
 #endif
         const auto connectedToFinishedAnimation =
             is_node_connected_to_finished_animation(node, nodeTag, false);
-        nodesQueue.emplace_back(NodesQueueItem{
-            .node = node,
-            .connectedToFinishedAnimation = connectedToFinishedAnimation});
+        nodesQueue.emplace_back(
+            NodesQueueItem{
+                .node = node,
+                .connectedToFinishedAnimation = connectedToFinishedAnimation});
       }
     }
   }
@@ -694,9 +701,10 @@ void NativeAnimatedNodesManager::updateNodes(
         const auto connectedToFinishedAnimation =
             is_node_connected_to_finished_animation(
                 child, childTag, nextNode.connectedToFinishedAnimation);
-        nodesQueue.emplace_back(NodesQueueItem{
-            .node = child,
-            .connectedToFinishedAnimation = connectedToFinishedAnimation});
+        nodesQueue.emplace_back(
+            NodesQueueItem{
+                .node = child,
+                .connectedToFinishedAnimation = connectedToFinishedAnimation});
       }
 #ifdef REACT_NATIVE_DEBUG
       else if (child->bfsColor == animatedGraphBFSColor_) {
@@ -1007,7 +1015,7 @@ AnimationMutations NativeAnimatedNodesManager::pullAnimationMutations() {
     }
   } else {
     // There is no active animation. Stop the render callback.
-    stopRenderCallbackIfNeeded();
+    stopRenderCallbackIfNeeded(false);
   }
   return mutations;
 }
@@ -1082,7 +1090,7 @@ void NativeAnimatedNodesManager::onRender() {
     }
   } else {
     // There is no active animation. Stop the render callback.
-    stopRenderCallbackIfNeeded();
+    stopRenderCallbackIfNeeded(false);
   }
 }
 

@@ -19,23 +19,41 @@
 namespace facebook::react {
 
 UIManagerNativeAnimatedDelegateImpl::UIManagerNativeAnimatedDelegateImpl(
-    std::weak_ptr<NativeAnimatedNodesManager> nativeAnimatedNodesManager)
-    : nativeAnimatedNodesManager_(std::move(nativeAnimatedNodesManager)) {}
+    NativeAnimatedNodesManagerProvider::FrameRateListenerCallback
+        frameRateListenerCallback)
+    : frameRateListenerCallback_(std::move(frameRateListenerCallback)) {}
 
 void UIManagerNativeAnimatedDelegateImpl::runAnimationFrame() {
   if (auto nativeAnimatedNodesManagerStrong =
           nativeAnimatedNodesManager_.lock()) {
+    if (frameRateListenerCallback_) {
+      frameRateListenerCallback_(true);
+    }
     nativeAnimatedNodesManagerStrong->onRender();
   }
 }
 
 NativeAnimatedNodesManagerProvider::NativeAnimatedNodesManagerProvider(
-    NativeAnimatedNodesManager::StartOnRenderCallback startOnRenderCallback,
-    NativeAnimatedNodesManager::StopOnRenderCallback stopOnRenderCallback)
+    StartOnRenderCallback startOnRenderCallback,
+    StopOnRenderCallback stopOnRenderCallback,
+    FrameRateListenerCallback frameRateListenerCallback)
     : eventEmitterListenerContainer_(
           std::make_shared<EventEmitterListenerContainer>()),
-      startOnRenderCallback_(std::move(startOnRenderCallback)),
-      stopOnRenderCallback_(std::move(stopOnRenderCallback)) {}
+      frameRateListenerCallback_(std::move(frameRateListenerCallback)),
+      startOnRenderCallback_(std::move(startOnRenderCallback)) {
+  if (frameRateListenerCallback_) {
+    stopOnRenderCallback_ = [this, stopOnRenderCallback](bool isAsync) {
+      if (stopOnRenderCallback) {
+        stopOnRenderCallback(isAsync);
+      }
+      if (frameRateListenerCallback_) {
+        frameRateListenerCallback_(false);
+      }
+    };
+  } else {
+    stopOnRenderCallback_ = std::move(stopOnRenderCallback);
+  }
+}
 
 std::shared_ptr<NativeAnimatedNodesManager>
 NativeAnimatedNodesManagerProvider::getOrCreate(
@@ -67,6 +85,10 @@ NativeAnimatedNodesManagerProvider::getOrCreate(
           uiManager->synchronouslyUpdateViewOnUIThread(viewTag, props);
         };
 
+    nativeAnimatedDelegate_ =
+        std::make_shared<UIManagerNativeAnimatedDelegateImpl>(
+            frameRateListenerCallback_);
+
     if (ReactNativeFeatureFlags::useSharedAnimatedBackend()) {
 #ifdef RN_USE_ANIMATION_BACKEND
       // TODO: this should be initialized outside of animated, but for now it
@@ -84,37 +106,52 @@ NativeAnimatedNodesManagerProvider::getOrCreate(
 
       uiManager->unstable_setAnimationBackend(animationBackend_);
     } else {
+      auto startOnRenderCallback =
+          [this, startOnRenderCallbackFn = std::move(startOnRenderCallback_)](
+              bool isAsync) {
+            if (startOnRenderCallbackFn) {
+              startOnRenderCallbackFn(
+                  [this]() {
+                    if (nativeAnimatedDelegate_) {
+                      nativeAnimatedDelegate_->runAnimationFrame();
+                    }
+                  },
+                  isAsync);
+            }
+          };
       nativeAnimatedNodesManager_ =
           std::make_shared<NativeAnimatedNodesManager>(
               std::move(directManipulationCallback),
               std::move(fabricCommitCallback),
-              std::move(startOnRenderCallback_),
+              std::move(startOnRenderCallback),
               std::move(stopOnRenderCallback_));
     }
+
+    std::static_pointer_cast<UIManagerNativeAnimatedDelegateImpl>(
+        nativeAnimatedDelegate_)
+        ->setNativeAnimatedNodesManager(nativeAnimatedNodesManager_);
 
     addEventEmitterListener(
         nativeAnimatedNodesManager_->getEventEmitterListener());
 
-    uiManager->addEventListener(std::make_shared<EventListener>(
-        [eventEmitterListenerContainerWeak =
-             std::weak_ptr<EventEmitterListenerContainer>(
-                 eventEmitterListenerContainer_)](const RawEvent& rawEvent) {
-          const auto& eventTarget = rawEvent.eventTarget;
-          const auto& eventPayload = rawEvent.eventPayload;
-          if (eventTarget && eventPayload) {
-            if (auto eventEmitterListenerContainer =
-                    eventEmitterListenerContainerWeak.lock();
-                eventEmitterListenerContainer != nullptr) {
-              return eventEmitterListenerContainer->willDispatchEvent(
-                  eventTarget->getTag(), rawEvent.type, *eventPayload);
-            }
-          }
-          return false;
-        }));
-
-    nativeAnimatedDelegate_ =
-        std::make_shared<UIManagerNativeAnimatedDelegateImpl>(
-            nativeAnimatedNodesManager_);
+    uiManager->addEventListener(
+        std::make_shared<EventListener>(
+            [eventEmitterListenerContainerWeak =
+                 std::weak_ptr<EventEmitterListenerContainer>(
+                     eventEmitterListenerContainer_)](
+                const RawEvent& rawEvent) {
+              const auto& eventTarget = rawEvent.eventTarget;
+              const auto& eventPayload = rawEvent.eventPayload;
+              if (eventTarget && eventPayload) {
+                if (auto eventEmitterListenerContainer =
+                        eventEmitterListenerContainerWeak.lock();
+                    eventEmitterListenerContainer != nullptr) {
+                  return eventEmitterListenerContainer->willDispatchEvent(
+                      eventTarget->getTag(), rawEvent.type, *eventPayload);
+                }
+              }
+              return false;
+            }));
 
     uiManager->setNativeAnimatedDelegate(nativeAnimatedDelegate_);
 

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<42fe3f524ad5d1e8a565ada8f9eebd24>>
+ * @generated SignedSource<<9bb9145e823dae3447fa8fbb31676b37>>
  * @flow strict
  * @noformat
  */
@@ -76,7 +76,6 @@ export type ReactNativeFeatureFlags = $ReadOnly<{
   enableIOSTextBaselineOffsetPerLine: Getter<boolean>,
   enableIOSViewClipToPaddingBox: Getter<boolean>,
   enableImagePrefetchingAndroid: Getter<boolean>,
-  enableImagePrefetchingJNIBatchingAndroid: Getter<boolean>,
   enableImagePrefetchingOnUiThreadAndroid: Getter<boolean>,
   enableImmediateUpdateModeForContentOffsetChanges: Getter<boolean>,
   enableImperativeFocus: Getter<boolean>,
@@ -97,6 +96,7 @@ export type ReactNativeFeatureFlags = $ReadOnly<{
   enableViewRecyclingForScrollView: Getter<boolean>,
   enableViewRecyclingForText: Getter<boolean>,
   enableViewRecyclingForView: Getter<boolean>,
+  enableVirtualViewContainerStateExperimental: Getter<boolean>,
   enableVirtualViewDebugFeatures: Getter<boolean>,
   enableVirtualViewRenderState: Getter<boolean>,
   enableVirtualViewWindowFocusDetection: Getter<boolean>,
@@ -316,10 +316,6 @@ export const enableIOSViewClipToPaddingBox: Getter<boolean> = createNativeFlagGe
  */
 export const enableImagePrefetchingAndroid: Getter<boolean> = createNativeFlagGetter('enableImagePrefetchingAndroid', false);
 /**
- * When enabled, Android will build and initiate image prefetch requests on ImageShadowNode::layout and batch them together in a single JNI call
- */
-export const enableImagePrefetchingJNIBatchingAndroid: Getter<boolean> = createNativeFlagGetter('enableImagePrefetchingJNIBatchingAndroid', false);
-/**
  * When enabled, Android will initiate image prefetch requested on ImageShadowNode::layout on the UI thread
  */
 export const enableImagePrefetchingOnUiThreadAndroid: Getter<boolean> = createNativeFlagGetter('enableImagePrefetchingOnUiThreadAndroid', false);
@@ -399,6 +395,10 @@ export const enableViewRecyclingForText: Getter<boolean> = createNativeFlagGette
  * Enables View Recycling for <View> via ReactViewGroup/ReactViewManager.
  */
 export const enableViewRecyclingForView: Getter<boolean> = createNativeFlagGetter('enableViewRecyclingForView', true);
+/**
+ * Enables the experimental version of `VirtualViewContainerState`.
+ */
+export const enableVirtualViewContainerStateExperimental: Getter<boolean> = createNativeFlagGetter('enableVirtualViewContainerStateExperimental', false);
 /**
  * Enables VirtualView debug features such as logging and overlays.
  */

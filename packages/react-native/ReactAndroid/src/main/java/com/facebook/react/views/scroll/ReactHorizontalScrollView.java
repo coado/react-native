@@ -216,7 +216,7 @@ public class ReactHorizontalScrollView extends HorizontalScrollView
   @Override
   public VirtualViewContainerState getVirtualViewContainerState() {
     if (mVirtualViewContainerState == null) {
-      mVirtualViewContainerState = new VirtualViewContainerState(this);
+      mVirtualViewContainerState = VirtualViewContainerState.create(this);
     }
 
     return mVirtualViewContainerState;
@@ -802,6 +802,38 @@ public class ReactHorizontalScrollView extends HorizontalScrollView
     // We do not dispatch the motion event if its children are not supposed to receive it
     if (!PointerEvents.canChildrenBeTouchTarget(mPointerEvents)) {
       return false;
+    }
+
+    // Handle ACTION_SCROLL events (mouse wheel, trackpad, joystick)
+    if (ev.getActionMasked() == MotionEvent.ACTION_SCROLL) {
+      float hScroll = ev.getAxisValue(MotionEvent.AXIS_HSCROLL);
+      if (hScroll != 0) {
+        // Perform the scroll
+        boolean result = super.dispatchGenericMotionEvent(ev);
+        // Schedule snap alignment to run after scrolling stops
+        if (result
+            && (mPagingEnabled
+                || mSnapInterval != 0
+                || mSnapOffsets != null
+                || mSnapToAlignment != SNAP_ALIGNMENT_DISABLED)) {
+          // Cancel any pending runnable and reschedule
+          if (mPostTouchRunnable != null) {
+            removeCallbacks(mPostTouchRunnable);
+          }
+          mPostTouchRunnable =
+              new Runnable() {
+                @Override
+                public void run() {
+                  mPostTouchRunnable = null;
+                  // Trigger snap alignment now that scrolling has stopped
+                  handlePostTouchScrolling(0, 0);
+                }
+              };
+          ViewCompat.postOnAnimationDelayed(
+              this, mPostTouchRunnable, ReactScrollViewHelper.MOMENTUM_DELAY);
+        }
+        return result;
+      }
     }
 
     return super.dispatchGenericMotionEvent(ev);

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<1c0cdfdfd5d77e602e4b44bb13e7be4b>>
+ * @generated SignedSource<<2ac15ead28cac3a969854f339d625dca>>
  */
 
 /**
@@ -88,8 +88,6 @@ class NativeReactNativeFeatureFlags
 
   bool enableImagePrefetchingAndroid(jsi::Runtime& runtime);
 
-  bool enableImagePrefetchingJNIBatchingAndroid(jsi::Runtime& runtime);
-
   bool enableImagePrefetchingOnUiThreadAndroid(jsi::Runtime& runtime);
 
   bool enableImmediateUpdateModeForContentOffsetChanges(jsi::Runtime& runtime);
@@ -129,6 +127,8 @@ class NativeReactNativeFeatureFlags
   bool enableViewRecyclingForText(jsi::Runtime& runtime);
 
   bool enableViewRecyclingForView(jsi::Runtime& runtime);
+
+  bool enableVirtualViewContainerStateExperimental(jsi::Runtime& runtime);
 
   bool enableVirtualViewDebugFeatures(jsi::Runtime& runtime);
 

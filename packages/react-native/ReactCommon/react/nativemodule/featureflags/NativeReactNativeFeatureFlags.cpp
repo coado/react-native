@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<8d6ba2c295ca32ced7acd3a0679a3cab>>
+ * @generated SignedSource<<81b1cc08f5f6aa5f44c002eb7992811f>>
  */
 
 /**
@@ -174,11 +174,6 @@ bool NativeReactNativeFeatureFlags::enableImagePrefetchingAndroid(
   return ReactNativeFeatureFlags::enableImagePrefetchingAndroid();
 }
 
-bool NativeReactNativeFeatureFlags::enableImagePrefetchingJNIBatchingAndroid(
-    jsi::Runtime& /*runtime*/) {
-  return ReactNativeFeatureFlags::enableImagePrefetchingJNIBatchingAndroid();
-}
-
 bool NativeReactNativeFeatureFlags::enableImagePrefetchingOnUiThreadAndroid(
     jsi::Runtime& /*runtime*/) {
   return ReactNativeFeatureFlags::enableImagePrefetchingOnUiThreadAndroid();
@@ -277,6 +272,11 @@ bool NativeReactNativeFeatureFlags::enableViewRecyclingForText(
 bool NativeReactNativeFeatureFlags::enableViewRecyclingForView(
     jsi::Runtime& /*runtime*/) {
   return ReactNativeFeatureFlags::enableViewRecyclingForView();
+}
+
+bool NativeReactNativeFeatureFlags::enableVirtualViewContainerStateExperimental(
+    jsi::Runtime& /*runtime*/) {
+  return ReactNativeFeatureFlags::enableVirtualViewContainerStateExperimental();
 }
 
 bool NativeReactNativeFeatureFlags::enableVirtualViewDebugFeatures(

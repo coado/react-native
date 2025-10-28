@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<2fa1e7cd2e1d4009dfa09a5fd27a872a>>
+ * @generated SignedSource<<7f43cde1ba2bef2300c077f35b168d31>>
  */
 
 /**
@@ -50,7 +50,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var enableIOSTextBaselineOffsetPerLineCache: Boolean? = null
   private var enableIOSViewClipToPaddingBoxCache: Boolean? = null
   private var enableImagePrefetchingAndroidCache: Boolean? = null
-  private var enableImagePrefetchingJNIBatchingAndroidCache: Boolean? = null
   private var enableImagePrefetchingOnUiThreadAndroidCache: Boolean? = null
   private var enableImmediateUpdateModeForContentOffsetChangesCache: Boolean? = null
   private var enableImperativeFocusCache: Boolean? = null
@@ -71,6 +70,7 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var enableViewRecyclingForScrollViewCache: Boolean? = null
   private var enableViewRecyclingForTextCache: Boolean? = null
   private var enableViewRecyclingForViewCache: Boolean? = null
+  private var enableVirtualViewContainerStateExperimentalCache: Boolean? = null
   private var enableVirtualViewDebugFeaturesCache: Boolean? = null
   private var enableVirtualViewRenderStateCache: Boolean? = null
   private var enableVirtualViewWindowFocusDetectionCache: Boolean? = null
@@ -365,16 +365,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
     return cached
   }
 
-  override fun enableImagePrefetchingJNIBatchingAndroid(): Boolean {
-    var cached = enableImagePrefetchingJNIBatchingAndroidCache
-    if (cached == null) {
-      cached = currentProvider.enableImagePrefetchingJNIBatchingAndroid()
-      accessedFeatureFlags.add("enableImagePrefetchingJNIBatchingAndroid")
-      enableImagePrefetchingJNIBatchingAndroidCache = cached
-    }
-    return cached
-  }
-
   override fun enableImagePrefetchingOnUiThreadAndroid(): Boolean {
     var cached = enableImagePrefetchingOnUiThreadAndroidCache
     if (cached == null) {
@@ -571,6 +561,16 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
       cached = currentProvider.enableViewRecyclingForView()
       accessedFeatureFlags.add("enableViewRecyclingForView")
       enableViewRecyclingForViewCache = cached
+    }
+    return cached
+  }
+
+  override fun enableVirtualViewContainerStateExperimental(): Boolean {
+    var cached = enableVirtualViewContainerStateExperimentalCache
+    if (cached == null) {
+      cached = currentProvider.enableVirtualViewContainerStateExperimental()
+      accessedFeatureFlags.add("enableVirtualViewContainerStateExperimental")
+      enableVirtualViewContainerStateExperimentalCache = cached
     }
     return cached
   }

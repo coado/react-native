@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<5c430e6e6ac1a7272eae8f89f4052193>>
+ * @generated SignedSource<<21049b33fc72200390c6dd6d0ca27c19>>
  */
 
 /**
@@ -131,10 +131,6 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return false;
   }
 
-  bool enableImagePrefetchingJNIBatchingAndroid() override {
-    return false;
-  }
-
   bool enableImagePrefetchingOnUiThreadAndroid() override {
     return false;
   }
@@ -213,6 +209,10 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
 
   bool enableViewRecyclingForView() override {
     return true;
+  }
+
+  bool enableVirtualViewContainerStateExperimental() override {
+    return false;
   }
 
   bool enableVirtualViewDebugFeatures() override {

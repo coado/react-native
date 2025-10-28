@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<67cb9ad627e865b24b380be1ef6e0db7>>
+ * @generated SignedSource<<98a77cdecfd3e6d42f03b2b4ba3d8c88>>
  */
 
 /**
@@ -170,11 +170,6 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool enableImagePrefetchingAndroid();
 
   /**
-   * When enabled, Android will build and initiate image prefetch requests on ImageShadowNode::layout and batch them together in a single JNI call
-   */
-  RN_EXPORT static bool enableImagePrefetchingJNIBatchingAndroid();
-
-  /**
    * When enabled, Android will initiate image prefetch requested on ImageShadowNode::layout on the UI thread
    */
   RN_EXPORT static bool enableImagePrefetchingOnUiThreadAndroid();
@@ -273,6 +268,11 @@ class ReactNativeFeatureFlags {
    * Enables View Recycling for <View> via ReactViewGroup/ReactViewManager.
    */
   RN_EXPORT static bool enableViewRecyclingForView();
+
+  /**
+   * Enables the experimental version of `VirtualViewContainerState`.
+   */
+  RN_EXPORT static bool enableVirtualViewContainerStateExperimental();
 
   /**
    * Enables VirtualView debug features such as logging and overlays.

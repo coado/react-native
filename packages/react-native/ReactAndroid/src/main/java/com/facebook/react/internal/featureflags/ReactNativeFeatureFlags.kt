@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<132ff30c4a5ecf6b38dd0d6cc47d3abc>>
+ * @generated SignedSource<<28000f9d4a36207875619060f2fa5713>>
  */
 
 /**
@@ -187,12 +187,6 @@ public object ReactNativeFeatureFlags {
   public fun enableImagePrefetchingAndroid(): Boolean = accessor.enableImagePrefetchingAndroid()
 
   /**
-   * When enabled, Android will build and initiate image prefetch requests on ImageShadowNode::layout and batch them together in a single JNI call
-   */
-  @JvmStatic
-  public fun enableImagePrefetchingJNIBatchingAndroid(): Boolean = accessor.enableImagePrefetchingJNIBatchingAndroid()
-
-  /**
    * When enabled, Android will initiate image prefetch requested on ImageShadowNode::layout on the UI thread
    */
   @JvmStatic
@@ -311,6 +305,12 @@ public object ReactNativeFeatureFlags {
    */
   @JvmStatic
   public fun enableViewRecyclingForView(): Boolean = accessor.enableViewRecyclingForView()
+
+  /**
+   * Enables the experimental version of `VirtualViewContainerState`.
+   */
+  @JvmStatic
+  public fun enableVirtualViewContainerStateExperimental(): Boolean = accessor.enableVirtualViewContainerStateExperimental()
 
   /**
    * Enables VirtualView debug features such as logging and overlays.

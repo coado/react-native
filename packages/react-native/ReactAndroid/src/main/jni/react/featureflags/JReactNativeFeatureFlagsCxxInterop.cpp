@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<285ec8cc3b3e5f55c5c31106b6df8717>>
+ * @generated SignedSource<<48a05f5360c927150021af873e6d52b8>>
  */
 
 /**
@@ -195,12 +195,6 @@ class ReactNativeFeatureFlagsJavaProvider
     return method(javaProvider_);
   }
 
-  bool enableImagePrefetchingJNIBatchingAndroid() override {
-    static const auto method =
-        getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableImagePrefetchingJNIBatchingAndroid");
-    return method(javaProvider_);
-  }
-
   bool enableImagePrefetchingOnUiThreadAndroid() override {
     static const auto method =
         getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableImagePrefetchingOnUiThreadAndroid");
@@ -318,6 +312,12 @@ class ReactNativeFeatureFlagsJavaProvider
   bool enableViewRecyclingForView() override {
     static const auto method =
         getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableViewRecyclingForView");
+    return method(javaProvider_);
+  }
+
+  bool enableVirtualViewContainerStateExperimental() override {
+    static const auto method =
+        getReactNativeFeatureFlagsProviderJavaClass()->getMethod<jboolean()>("enableVirtualViewContainerStateExperimental");
     return method(javaProvider_);
   }
 
@@ -653,11 +653,6 @@ bool JReactNativeFeatureFlagsCxxInterop::enableImagePrefetchingAndroid(
   return ReactNativeFeatureFlags::enableImagePrefetchingAndroid();
 }
 
-bool JReactNativeFeatureFlagsCxxInterop::enableImagePrefetchingJNIBatchingAndroid(
-    facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
-  return ReactNativeFeatureFlags::enableImagePrefetchingJNIBatchingAndroid();
-}
-
 bool JReactNativeFeatureFlagsCxxInterop::enableImagePrefetchingOnUiThreadAndroid(
     facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
   return ReactNativeFeatureFlags::enableImagePrefetchingOnUiThreadAndroid();
@@ -756,6 +751,11 @@ bool JReactNativeFeatureFlagsCxxInterop::enableViewRecyclingForText(
 bool JReactNativeFeatureFlagsCxxInterop::enableViewRecyclingForView(
     facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
   return ReactNativeFeatureFlags::enableViewRecyclingForView();
+}
+
+bool JReactNativeFeatureFlagsCxxInterop::enableVirtualViewContainerStateExperimental(
+    facebook::jni::alias_ref<JReactNativeFeatureFlagsCxxInterop> /*unused*/) {
+  return ReactNativeFeatureFlags::enableVirtualViewContainerStateExperimental();
 }
 
 bool JReactNativeFeatureFlagsCxxInterop::enableVirtualViewDebugFeatures(
@@ -1033,9 +1033,6 @@ void JReactNativeFeatureFlagsCxxInterop::registerNatives() {
         "enableImagePrefetchingAndroid",
         JReactNativeFeatureFlagsCxxInterop::enableImagePrefetchingAndroid),
       makeNativeMethod(
-        "enableImagePrefetchingJNIBatchingAndroid",
-        JReactNativeFeatureFlagsCxxInterop::enableImagePrefetchingJNIBatchingAndroid),
-      makeNativeMethod(
         "enableImagePrefetchingOnUiThreadAndroid",
         JReactNativeFeatureFlagsCxxInterop::enableImagePrefetchingOnUiThreadAndroid),
       makeNativeMethod(
@@ -1095,6 +1092,9 @@ void JReactNativeFeatureFlagsCxxInterop::registerNatives() {
       makeNativeMethod(
         "enableViewRecyclingForView",
         JReactNativeFeatureFlagsCxxInterop::enableViewRecyclingForView),
+      makeNativeMethod(
+        "enableVirtualViewContainerStateExperimental",
+        JReactNativeFeatureFlagsCxxInterop::enableVirtualViewContainerStateExperimental),
       makeNativeMethod(
         "enableVirtualViewDebugFeatures",
         JReactNativeFeatureFlagsCxxInterop::enableVirtualViewDebugFeatures),

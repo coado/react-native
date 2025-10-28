@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<52167b9f49cce6af156a38967019baff>>
+ * @generated SignedSource<<cc71bfa62258ec91b00c4646441fa7fc>>
  */
 
 /**
@@ -279,15 +279,6 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     return ReactNativeFeatureFlagsDefaults::enableImagePrefetchingAndroid();
   }
 
-  bool enableImagePrefetchingJNIBatchingAndroid() override {
-    auto value = values_["enableImagePrefetchingJNIBatchingAndroid"];
-    if (!value.isNull()) {
-      return value.getBool();
-    }
-
-    return ReactNativeFeatureFlagsDefaults::enableImagePrefetchingJNIBatchingAndroid();
-  }
-
   bool enableImagePrefetchingOnUiThreadAndroid() override {
     auto value = values_["enableImagePrefetchingOnUiThreadAndroid"];
     if (!value.isNull()) {
@@ -466,6 +457,15 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     }
 
     return ReactNativeFeatureFlagsDefaults::enableViewRecyclingForView();
+  }
+
+  bool enableVirtualViewContainerStateExperimental() override {
+    auto value = values_["enableVirtualViewContainerStateExperimental"];
+    if (!value.isNull()) {
+      return value.getBool();
+    }
+
+    return ReactNativeFeatureFlagsDefaults::enableVirtualViewContainerStateExperimental();
   }
 
   bool enableVirtualViewDebugFeatures() override {
