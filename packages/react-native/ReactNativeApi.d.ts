@@ -36,7 +36,7 @@ declare const $$AnimatedImage: AnimatedComponentType<
   React.ComponentRef<typeof Image>
 >
 declare const $$AnimatedImplementation: {
-  // add: typeof addImpl
+  add: typeof addImpl
   attachNativeEvent: typeof attachNativeEventImpl
   Color: typeof AnimatedColor_default
   createAnimatedComponent: typeof createAnimatedComponent_default
