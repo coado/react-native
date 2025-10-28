@@ -185,6 +185,8 @@ class RCTHostHostTargetDelegate : public facebook::react::jsinspector_modern::Ho
     _jsEngineProvider = [jsEngineProvider copy];
     _launchOptions = [launchOptions copy];
 
+    NSLog(@"test");
+
     __weak RCTHost *weakSelf = self;
     auto bundleURLGetter = ^NSURL *() {
       RCTHost *strongSelf = weakSelf;
