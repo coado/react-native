@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 #import <RCTDefaultReactNativeFactoryDelegate.h>
 #import <RCTReactNativeFactory.h>
 #import <UIKit/UIKit.h>
@@ -6,8 +13,5 @@
 
 @property (nonatomic, strong, nonnull) UIWindow *window;
 @property (nonatomic, strong, nonnull) RCTReactNativeFactory *reactNativeFactory;
-@property (nonatomic, strong, nullable) UIButton *topButton;
-@property (nonatomic, strong) NSDictionary *launchOptions;
-@property (nonatomic, assign) NSString *port;
 
 @end

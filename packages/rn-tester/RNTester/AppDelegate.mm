@@ -1,8 +1,14 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 #import "AppDelegate.h"
 
 #import <UserNotifications/UserNotifications.h>
 
-#import <React/RCTBundleManager.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTDefines.h>
 #import <React/RCTLinkingManager.h>
@@ -23,6 +29,10 @@
 #define USE_OSS_CODEGEN 0
 #endif
 
+#if RCT_DEV_MENU
+#import <React/RCTDevMenu.h>
+#endif
+
 static NSString *kBundlePath = @"js/RNTesterApp.ios";
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
@@ -32,71 +42,30 @@ static NSString *kBundlePath = @"js/RNTesterApp.ios";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.launchOptions = launchOptions;
-  self.port = @"8081";
-  
+  self.reactNativeFactory = [[RCTReactNativeFactory alloc] initWithDelegate:self];
 #if USE_OSS_CODEGEN
   self.dependencyProvider = [RCTAppDependencyProvider new];
 #endif
 
+#if RCT_DEV_MENU
+
+  RCTDevMenuConfiguration *devMenuConfiguration = [[RCTDevMenuConfiguration alloc] initWithDevMenuEnabled:true
+                                                                                      shakeGestureEnabled:true
+                                                                                 keyboardShortcutsEnabled:true];
+  [self.reactNativeFactory setDevMenuConfiguration:devMenuConfiguration];
+
+#endif
+
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  
-  [self startReactNative];
+
+  [self.reactNativeFactory startReactNativeWithModuleName:@"RNTesterApp"
+                                                 inWindow:self.window
+                                        initialProperties:[self prepareInitialProps]
+                                            launchOptions:launchOptions];
 
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
 
   return YES;
-}
-
-- (void)startReactNative
-{
-  self.reactNativeFactory = [[RCTReactNativeFactory alloc] initWithDelegate:self];
-  
-  NSString *packagerServerHost = [NSString stringWithFormat:@"localhost:%@", self.port];
-  
-  RCTBundleConfiguration *bundleConfiguration =
-      [[RCTBundleConfiguration alloc] initWithPackagerServerScheme:@"http" packagerServerHost:packagerServerHost bundlePath:kBundlePath];
-
-  self.reactNativeFactory.bundleConfiguration = bundleConfiguration;
-  
-  [self.reactNativeFactory startReactNativeWithModuleName:@"RNTesterApp"
-                                                 inWindow:self.window
-                                        initialProperties:[self prepareInitialProps]
-                                            launchOptions:self.launchOptions];
-  
-  [self createTopButton];
-}
-
-- (void)createTopButton
-{
-  NSString *title = [NSString stringWithFormat:@"Restart RN:%@", self.port];
-  
-  self.topButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  [self.topButton setTitle:title forState:UIControlStateNormal];
-  [self.topButton setBackgroundColor:[UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1]];
-  [self.topButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
-  CGFloat buttonWidth = 120;
-  CGFloat buttonHeight = 44;
-  CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-
-  self.topButton.frame = CGRectMake((screenWidth - buttonWidth) / 2, 50, buttonWidth, buttonHeight);
-  self.topButton.layer.cornerRadius = 8;
-  [self.topButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-  [self.window addSubview:self.topButton];
-  [self.window bringSubviewToFront:self.topButton];
-}
-
-- (void)togglePort
-{
-  self.port = [self.port  isEqual: @"8081"] ? @"8082" : @"8081";
-}
-
-- (void)buttonTapped:(UIButton *)sender
-{
-  self.reactNativeFactory = nil;
-  [self togglePort];
-  [self startReactNative];
 }
 
 - (NSDictionary *)prepareInitialProps
