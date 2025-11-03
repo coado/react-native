@@ -52,9 +52,9 @@ declare const $$AnimatedImplementation: {
   modulo: typeof moduloImpl
   multiply: typeof multiplyImpl
   Node: typeof AnimatedNode_default
-  parallel: typeof parallelImpl
-  sequence: typeof sequenceImpl
-  spring: typeof springImpl
+  // parallel: typeof parallelImpl
+  // sequence: typeof sequenceImpl
+  // spring: typeof springImpl
   stagger: typeof staggerImpl
   subtract: typeof subtractImpl
   timing: typeof timingImpl
