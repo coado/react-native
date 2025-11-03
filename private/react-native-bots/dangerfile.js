@@ -36,7 +36,9 @@ const snapshot_path = path.join(
 );
 
 if (fs.existsSync(snapshot_path)) {
+  console.log('JS API snapshot found, checking for changes...');
   const snapshot_output = JSON.parse(fs.readFileSync(snapshot_path, 'utf8'));
+  console.log('Snapshot output:', snapshot_output);
   if (snapshot_output && snapshot_output.result !== 'NON_BREAKING') {
     const title = ':exclamation: JavaScript API change detected';
     const idea =
@@ -46,6 +48,8 @@ if (fs.existsSync(snapshot_path)) {
       `This change was flagged as: <code>${snapshot_output.result}</code>`;
     warn(`${title} - <i>${idea}</i>`);
   }
+} else {
+  console.log('No JS API snapshot found, skipping JS API change check.');
 }
 
 const hasNoUsefulBody =
