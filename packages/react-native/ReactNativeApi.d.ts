@@ -6121,7 +6121,7 @@ export {
   Share, // e4591b32
   ShareAction, // ead1004a
   ShareActionSheetError, // 55e4f451
-  ShareActionSheetIOSOptions, // eff574f5
+  ShareActionSheetIOSOptions, // eff574f8
   ShareContent, // 7c627896
   ShareOptions, // 800c3a4e
   SimpleTask, // 0e619d11
