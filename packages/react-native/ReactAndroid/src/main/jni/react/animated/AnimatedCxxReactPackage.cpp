@@ -43,8 +43,7 @@ AnimatedCxxReactPackage::getNativeAnimatedNodesManagerProvider() {
   }
 
   auto nativeAnimatedNodesManagerProvider =
-      std::make_shared<NativeAnimatedNodesManagerProvider>(
-          [](std::function<void()>&& cb, bool) { cb(); }, [](bool) {});
+      std::make_shared<NativeAnimatedNodesManagerProvider>(nullptr, nullptr);
 
   nativeAnimatedNodesManagerProvider_ = nativeAnimatedNodesManagerProvider;
   return nativeAnimatedNodesManagerProvider;
