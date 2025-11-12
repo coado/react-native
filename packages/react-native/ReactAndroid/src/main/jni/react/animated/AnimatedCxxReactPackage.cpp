@@ -30,8 +30,7 @@ std::shared_ptr<TurboModule> AnimatedCxxReactPackage::getModule(
     const std::shared_ptr<CallInvoker>& jsInvoker) {
   if (moduleName == "NativeAnimatedModule") {
     return std::make_shared<AnimatedModule>(
-        jsInvoker, nullptr /* nodesManagerProvider */
-    );
+        jsInvoker, getNativeAnimatedNodesManagerProvider());
   }
 
   return nullptr;
@@ -43,10 +42,12 @@ AnimatedCxxReactPackage::getNativeAnimatedNodesManagerProvider() {
     return provider;
   }
 
-  nativeAnimatedNodesManagerProvider_ =
+  auto nativeAnimatedNodesManagerProvider =
       std::make_shared<NativeAnimatedNodesManagerProvider>(
-          [](std::function<void()>, bool) {}, [](bool) {});
-  return nativeAnimatedNodesManagerProvider_.lock();
+          [](std::function<void()>&& cb, bool) { cb(); }, [](bool) {});
+
+  nativeAnimatedNodesManagerProvider_ = nativeAnimatedNodesManagerProvider;
+  return nativeAnimatedNodesManagerProvider;
 }
 
 } // namespace facebook::react

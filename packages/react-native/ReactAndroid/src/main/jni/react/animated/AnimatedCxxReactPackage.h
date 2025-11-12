@@ -4,51 +4,41 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-#include <react/jni/JWeakRefUtils.h>
-#include <react/renderer/animated/AnimatedModule.h>
-#include "AnimatedCxxReactPackage.h"
+
+#pragma once
+
+#include <ReactCommon/CxxReactPackage.h>
+#include <fbjni/fbjni.h>
+#include <react/renderer/animated/NativeAnimatedNodesManagerProvider.h>
 
 namespace facebook::react {
+class AnimatedCxxReactPackage
+    : public jni::HybridClass<AnimatedCxxReactPackage, CxxReactPackage> {
+ public:
+  static constexpr auto kJavaDescriptor =
+      "Lcom/facebook/react/animated/AnimatedCxxReactPackage;";
 
-AnimatedCxxReactPackage::AnimatedCxxReactPackage(
-    jni::alias_ref<AnimatedCxxReactPackage::javaobject> jobj) {}
+  static jni::local_ref<jhybriddata> initHybrid(
+      jni::alias_ref<facebook::react::AnimatedCxxReactPackage::javaobject>
+          jobj);
 
-jni::local_ref<AnimatedCxxReactPackage::jhybriddata>
-AnimatedCxxReactPackage::initHybrid(
-    jni::alias_ref<AnimatedCxxReactPackage::javaobject> jobj) {
-  return makeCxxInstance(jobj);
-}
+  static void registerNatives();
 
-void AnimatedCxxReactPackage::registerNatives() {
-  registerHybrid({
-      makeNativeMethod("initHybrid", AnimatedCxxReactPackage::initHybrid),
-  });
-}
+  AnimatedCxxReactPackage(
+      jni::alias_ref<AnimatedCxxReactPackage::javaobject> jobj);
 
-std::shared_ptr<TurboModule> AnimatedCxxReactPackage::getModule(
-    const std::string& moduleName,
-    const std::shared_ptr<CallInvoker>& jsInvoker) {
-  if (moduleName == "NativeAnimatedModule") {
-    auto provider = getNativeAnimatedNodesManagerProvider();
-    return std::make_shared<AnimatedModule>(
-        jsInvoker, provider /* nodesManagerProvider */
-    );
-  }
+  std::shared_ptr<TurboModule> getModule(
+      const std::string& moduleName,
+      const std::shared_ptr<CallInvoker>& jsInvoker) override;
 
-  return nullptr;
-}
+ private:
+  std::weak_ptr<NativeAnimatedNodesManagerProvider>
+      nativeAnimatedNodesManagerProvider_;
 
-std::shared_ptr<NativeAnimatedNodesManagerProvider>
-AnimatedCxxReactPackage::getNativeAnimatedNodesManagerProvider() {
-  if (auto provider = nativeAnimatedNodesManagerProvider_.lock()) {
-    return provider;
-  }
+  std::shared_ptr<NativeAnimatedNodesManagerProvider>
+  getNativeAnimatedNodesManagerProvider();
 
-  auto nativeAnimatedNodesManagerProvider =
-      std::make_shared<NativeAnimatedNodesManagerProvider>(nullptr, nullptr);
-
-  nativeAnimatedNodesManagerProvider_ = nativeAnimatedNodesManagerProvider;
-  return nativeAnimatedNodesManagerProvider;
-}
-
+  friend HybridBase;
+  using HybridBase::HybridBase;
+};
 } // namespace facebook::react
