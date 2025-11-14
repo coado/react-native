@@ -6,7 +6,7 @@
 cmake_minimum_required(VERSION 3.13)
 set(CMAKE_VERBOSE_MAKEFILE on)
 
-# include(${REACT_ANDROID_DIR}/src/main/jni/first-party/jni-lib-merge/SoMerging-utils.cmake)
+include(${REACT_ANDROID_DIR}/src/main/jni/first-party/jni-lib-merge/SoMerging-utils.cmake)
 include(${REACT_COMMON_DIR}/cmake-utils/react-native-flags.cmake)
 
 file(GLOB react_animatedjni_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
@@ -14,7 +14,7 @@ file(GLOB react_animatedjni_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.
 add_library(react_animatedjni OBJECT ${react_animatedjni_SRC})
 
 target_include_directories(react_animatedjni PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-# target_merge_so(react_animatedjni)
+target_merge_so(react_animatedjni)
 
 target_link_libraries(react_animatedjni
         fbjni
