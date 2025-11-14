@@ -13,6 +13,7 @@ import android.content.Context
 import com.facebook.react.ReactHost
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
+import com.facebook.react.animated.AnimatedCxxReactPackage
 import com.facebook.react.bridge.JSBundleLoader
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.common.annotations.UnstableReactNativeAPI
@@ -85,6 +86,7 @@ public object DefaultReactHost {
           }
       val defaultTmmDelegateBuilder = DefaultTurboModuleManagerDelegate.Builder()
       cxxReactPackageProviders.forEach { defaultTmmDelegateBuilder.addCxxReactPackage(it) }
+        defaultTmmDelegateBuilder.addCxxReactPackage { context -> AnimatedCxxReactPackage(context) }
       val defaultReactHostDelegate =
           DefaultReactHostDelegate(
               jsMainModulePath = jsMainModulePath,
