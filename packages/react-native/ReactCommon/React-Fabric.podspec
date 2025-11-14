@@ -59,6 +59,9 @@ Pod::Spec.new do |s|
     ss.source_files         = podspec_sources("react/renderer/animated/**/*.{m,mm,cpp,h}", "react/renderer/animated/**/*.{h}")
     ss.exclude_files        = "react/renderer/animated/tests"
     ss.header_dir           = "react/renderer/animated"
+    ss.pod_target_xcconfig  = {
+      "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) RN_USE_ANIMATION_BACKEND=1",
+    }
   end
 
   s.subspec "animations" do |ss|

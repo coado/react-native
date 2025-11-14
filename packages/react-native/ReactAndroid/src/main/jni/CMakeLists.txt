@@ -83,6 +83,8 @@ add_react_common_subdir(react/featureflags)
 add_react_common_subdir(react/performance/cdpmetrics)
 add_react_common_subdir(react/performance/timeline)
 add_react_common_subdir(react/renderer/animations)
+add_react_common_subdir(react/renderer/animated)
+add_react_common_subdir(react/renderer/animationbackend)
 add_react_common_subdir(react/renderer/attributedstring)
 add_react_common_subdir(react/renderer/componentregistry)
 add_react_common_subdir(react/renderer/mounting)
@@ -155,6 +157,7 @@ add_react_android_subdir(src/main/jni/react/runtime/cxxreactpackage)
 add_react_android_subdir(src/main/jni/react/runtime/jni)
 add_react_android_subdir(src/main/jni/react/runtime/hermes/jni)
 add_react_android_subdir(src/main/jni/react/devsupport)
+add_react_android_subdir(src/main/jni/react/animated)
 add_react_android_subdir(src/main/jni/react/tracing)
 
 # SoMerging Utils
@@ -203,6 +206,9 @@ add_library(reactnative
           $<TARGET_OBJECTS:react_performance_timeline>
           $<TARGET_OBJECTS:react_performancetracerjni>
           $<TARGET_OBJECTS:react_renderer_animations>
+          $<TARGET_OBJECTS:react_renderer_animationbackend>
+          $<TARGET_OBJECTS:react_renderer_animated>
+          $<TARGET_OBJECTS:react_animatedjni>
           $<TARGET_OBJECTS:react_renderer_attributedstring>
           $<TARGET_OBJECTS:react_renderer_componentregistry>
           $<TARGET_OBJECTS:react_renderer_consistency>
@@ -297,6 +303,9 @@ target_include_directories(reactnative
         $<TARGET_PROPERTY:react_performance_timeline,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_performancetracerjni,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_animations,INTERFACE_INCLUDE_DIRECTORIES>
+        $<TARGET_PROPERTY:react_renderer_animationbackend,INTERFACE_INCLUDE_DIRECTORIES>
+        $<TARGET_PROPERTY:react_renderer_animated,INTERFACE_INCLUDE_DIRECTORIES>
+        $<TARGET_PROPERTY:react_animatedjni,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_attributedstring,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_componentregistry,INTERFACE_INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:react_renderer_componentregistry,INTERFACE_INCLUDE_DIRECTORIES>
