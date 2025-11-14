@@ -15,6 +15,7 @@
 
 #import <objc/runtime.h>
 
+#import <React-RCTAnimatedModuleProvider/RCTAnimatedModuleProvider/RCTAnimatedModuleProvider.h>
 #import <React/RCTBridge+Private.h>
 #import <React/RCTBridgeModule.h>
 #import <React/RCTBridgeProxy.h>
@@ -217,6 +218,7 @@ typedef struct {
   RCTBridgeProxy *_bridgeProxy;
   RCTBridgeModuleDecorator *_bridgeModuleDecorator;
   RCTDevMenuConfigurationDecorator *_devMenuConfigurationDecorator;
+  RCTAnimatedModuleProvider *animatedModuleProvider;
 
   dispatch_queue_t _sharedModuleQueue;
 }
@@ -258,6 +260,10 @@ typedef struct {
         }
       }
       _legacyEagerlyRegisteredModuleClasses = legacyEagerlyRegisteredModuleClasses;
+    }
+
+    if (ReactNativeFeatureFlags::cxxNativeAnimatedEnabled()) {
+      animatedModuleProvider = [RCTAnimatedModuleProvider new];
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -354,6 +360,12 @@ typedef struct {
     auto turboModule = it->second(_jsInvoker);
     _turboModuleCache.insert({moduleName, turboModule});
     return turboModule;
+  }
+
+  if (ReactNativeFeatureFlags::cxxNativeAnimatedEnabled()) {
+    if (auto module = [animatedModuleProvider getTurboModule:moduleName jsInvoker:_jsInvoker]) {
+      return module;
+    }
   }
 
   /**
