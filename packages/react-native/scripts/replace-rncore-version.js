@@ -10,48 +10,16 @@
 
 'use strict';
 
-const {spawnSync} = require('child_process');
-const fs = require('fs');
+const {
+  replaceConfiguration,
+  shouldReplaceConfiguration,
+  updateLastBuildConfiguration,
+  validateBuildConfiguration,
+  validateVersion,
+} = require('./replace-build-utils');
 const yargs = require('yargs');
 
 const LAST_BUILD_FILENAME = 'React-Core-prebuilt/.last_build_configuration';
-
-function validateBuildConfiguration(configuration /*: string */) {
-  if (!['Debug', 'Release'].includes(configuration)) {
-    throw new Error(`Invalid configuration ${configuration}`);
-  }
-}
-
-function validateVersion(version /*: ?string */) {
-  if (version == null || version === '') {
-    throw new Error('Version cannot be empty');
-  }
-}
-
-function shouldReplaceRnCoreConfiguration(configuration /*: string */) {
-  const fileExists = fs.existsSync(LAST_BUILD_FILENAME);
-
-  if (fileExists) {
-    console.log(`Found ${LAST_BUILD_FILENAME} file`);
-    const oldConfiguration = fs.readFileSync(LAST_BUILD_FILENAME).toString();
-    if (oldConfiguration === configuration) {
-      console.log(
-        'Same config of the previous build. No need to replace React-Core-prebuilt',
-      );
-      return false;
-    }
-  }
-
-  // Assumption: if there is no stored last build, we assume that it was build for debug.
-  if (!fileExists && configuration === 'Debug') {
-    console.log(
-      'No previous build detected, but Debug Configuration. No need to replace React-Core-prebuilt',
-    );
-    return false;
-  }
-
-  return true;
-}
 
 function replaceRNCoreConfiguration(
   configuration /*: string */,
@@ -59,22 +27,10 @@ function replaceRNCoreConfiguration(
   podsRoot /*: string */,
 ) {
   // Filename comes from rncore.rb
-  const tarballURLPath = `${podsRoot}/ReactNativeCore-artifacts/reactnative-core-${version.toLowerCase()}-${configuration.toLowerCase()}.tar.gz`;
-
+  const tarballPath = `${podsRoot}/ReactNativeCore-artifacts/reactnative-core-${version.toLowerCase()}-${configuration.toLowerCase()}.tar.gz`;
   const finalLocation = 'React-Core-prebuilt';
-  console.log('Preparing the final location', finalLocation);
-  fs.rmSync(finalLocation, {force: true, recursive: true});
-  fs.mkdirSync(finalLocation, {recursive: true});
 
-  console.log('Extracting the tarball', tarballURLPath);
-  spawnSync('tar', ['-xf', tarballURLPath, '-C', finalLocation], {
-    stdio: 'inherit',
-  });
-}
-
-function updateLastBuildConfiguration(configuration /*: string */) {
-  console.log(`Updating ${LAST_BUILD_FILENAME} with ${configuration}`);
-  fs.writeFileSync(LAST_BUILD_FILENAME, configuration);
+  replaceConfiguration(tarballPath, finalLocation);
 }
 
 function main(
@@ -85,12 +41,18 @@ function main(
   validateBuildConfiguration(configuration);
   validateVersion(version);
 
-  if (!shouldReplaceRnCoreConfiguration(configuration)) {
+  if (
+    !shouldReplaceConfiguration(
+      LAST_BUILD_FILENAME,
+      configuration,
+      'React-Core-prebuilt',
+    )
+  ) {
     return;
   }
 
   replaceRNCoreConfiguration(configuration, version, podsRoot);
-  updateLastBuildConfiguration(configuration);
+  updateLastBuildConfiguration(LAST_BUILD_FILENAME, configuration);
   console.log('Done replacing React Native prebuilt');
 }
 
