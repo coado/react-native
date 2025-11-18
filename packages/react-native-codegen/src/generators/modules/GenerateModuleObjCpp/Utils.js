@@ -10,7 +10,15 @@
 
 'use strict';
 
-import type {StructProperty} from './StructCollector';
+import type {Nullable} from '../../../CodegenSchema';
+import type {StructProperty, StructTypeAnnotation} from './StructCollector';
+
+const {unwrapNullable} = require('../../../parsers/parsers-commons');
+const {wrapOptional: wrapCxxOptional} = require('../../TypeUtils/Cxx');
+const {
+  wrapOptional: wrapObjCOptional,
+} = require('../../TypeUtils/Objective-C');
+const {capitalize} = require('../../Utils');
 
 function getSafePropertyName(property: StructProperty): string {
   if (property.name === 'id') {
@@ -26,7 +34,93 @@ function getNamespacedStructName(
   return `JS::${hasteModuleName}::${structName}`;
 }
 
+type ArrayTypeWrapperType = 'std::vector' | 'facebook::react::LazyVector';
+
+function toObjCType(
+  hasteModuleName: string,
+  nullableTypeAnnotation: Nullable<StructTypeAnnotation>,
+  isOptional: boolean = false,
+  arrayTypeWrapper: ArrayTypeWrapperType = 'std::vector',
+): string {
+  const [typeAnnotation, nullable] = unwrapNullable(nullableTypeAnnotation);
+  const isRequired = !nullable && !isOptional;
+
+  switch (typeAnnotation.type) {
+    case 'ReservedTypeAnnotation':
+      switch (typeAnnotation.name) {
+        case 'RootTag':
+          return wrapCxxOptional('double', isRequired);
+        default:
+          (typeAnnotation.name: empty);
+          throw new Error(`Unknown prop type, found: ${typeAnnotation.name}"`);
+      }
+    case 'StringTypeAnnotation':
+      return 'NSString *';
+    case 'StringLiteralTypeAnnotation':
+      return 'NSString *';
+    case 'StringLiteralUnionTypeAnnotation':
+      return 'NSString *';
+    case 'NumberTypeAnnotation':
+      return wrapCxxOptional('double', isRequired);
+    case 'NumberLiteralTypeAnnotation':
+      return wrapCxxOptional('double', isRequired);
+    case 'FloatTypeAnnotation':
+      return wrapCxxOptional('double', isRequired);
+    case 'Int32TypeAnnotation':
+      return wrapCxxOptional('double', isRequired);
+    case 'DoubleTypeAnnotation':
+      return wrapCxxOptional('double', isRequired);
+    case 'BooleanTypeAnnotation':
+      return wrapCxxOptional('bool', isRequired);
+    case 'EnumDeclaration':
+      switch (typeAnnotation.memberType) {
+        case 'NumberTypeAnnotation':
+          return wrapCxxOptional('double', isRequired);
+        case 'StringTypeAnnotation':
+          return 'NSString *';
+        default:
+          throw new Error(
+            `Couldn't convert enum into ObjC type: ${typeAnnotation.type}"`,
+          );
+      }
+    case 'GenericObjectTypeAnnotation':
+      return wrapObjCOptional('id<NSObject>', isRequired);
+    case 'ArrayTypeAnnotation':
+      if (typeAnnotation.elementType.type === 'AnyTypeAnnotation') {
+        return wrapObjCOptional('id<NSObject>', isRequired);
+      }
+
+      return wrapCxxOptional(
+        `${arrayTypeWrapper}<${toObjCType(
+          hasteModuleName,
+          typeAnnotation.elementType,
+          false,
+          arrayTypeWrapper,
+        )}>`,
+        isRequired,
+      );
+    case 'TypeAliasTypeAnnotation':
+      const structName = capitalize(typeAnnotation.name);
+      const namespacedStructName = getNamespacedStructName(
+        hasteModuleName,
+        structName,
+      );
+      return wrapCxxOptional(
+        arrayTypeWrapper === 'std::vector'
+          ? `${namespacedStructName}::Builder`
+          : namespacedStructName,
+        isRequired,
+      );
+    default:
+      (typeAnnotation.type: empty);
+      throw new Error(
+        `Couldn't convert into ObjC type: ${typeAnnotation.type}"`,
+      );
+  }
+}
+
 module.exports = {
   getSafePropertyName,
   getNamespacedStructName,
+  toObjCType,
 };
