@@ -185,7 +185,7 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun useShadowNodeStateOnClone(): Boolean = false
 
-  override fun useSharedAnimatedBackend(): Boolean = false
+  override fun useSharedAnimatedBackend(): Boolean = true
 
   override fun useTraitHiddenOnAndroid(): Boolean = false
 

@@ -352,7 +352,7 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool useSharedAnimatedBackend() override {
-    return false;
+    return true;
   }
 
   bool useTraitHiddenOnAndroid() override {
