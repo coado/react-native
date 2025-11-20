@@ -39,6 +39,9 @@ const snapshot_output = JSON.parse(
     'utf8',
   ),
 );
+
+console.log('Snapshot output:', snapshot_output);
+
 if (snapshot_output && snapshot_output.result !== 'NON_BREAKING') {
   const title = ':exclamation: JavaScript API change detected';
   const idea =
