@@ -6123,13 +6123,13 @@ export {
   ScrollViewProps, // 27986ff5
   ScrollViewPropsAndroid, // 84e2134b
   ScrollViewPropsIOS, // d83c9733
-  ScrollViewScrollToOptions, // 3313411e
+  ScrollViewScrollToOptions, // 33134111
   SectionBase, // b376bddc
   SectionList, // ff1193b2
   SectionListData, // 119baf83
   SectionListProps, // c9ac8e07
   SectionListRenderItem, // 1fad0435
-  SectionListRenderItemInfo, // 745e1992
+  SectionListRenderItemInfo, // 745e1995
   Separators, // 6a45f7e3
   Settings, // 4282b0da
   Share, // e4591b32
