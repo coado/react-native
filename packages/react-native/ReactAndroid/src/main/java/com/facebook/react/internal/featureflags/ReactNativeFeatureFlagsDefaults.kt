@@ -27,7 +27,7 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun cdpInteractionMetricsEnabled(): Boolean = false
 
-  override fun cxxNativeAnimatedEnabled(): Boolean = false
+  override fun cxxNativeAnimatedEnabled(): Boolean = true
 
   override fun cxxNativeAnimatedRemoveJsSync(): Boolean = false
 
@@ -189,7 +189,7 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun useShadowNodeStateOnClone(): Boolean = false
 
-  override fun useSharedAnimatedBackend(): Boolean = false
+  override fun useSharedAnimatedBackend(): Boolean = true
 
   override fun useTraitHiddenOnAndroid(): Boolean = false
 
