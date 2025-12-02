@@ -102,17 +102,6 @@ const definitions: FeatureFlagDefinitions = {
       },
       ossReleaseStage: 'none',
     },
-    disableFabricCommitInCXXAnimated: {
-      defaultValue: false,
-      metadata: {
-        dateAdded: '2024-10-26',
-        description:
-          'Prevents use of Fabric commit in C++ Animated implementation',
-        expectedReleaseValue: false,
-        purpose: 'experimentation',
-      },
-      ossReleaseStage: 'none',
-    },
     disableImageViewPreallocationAndroid: {
       defaultValue: false,
       metadata: {
@@ -196,6 +185,17 @@ const definitions: FeatureFlagDefinitions = {
         dateAdded: '2024-12-10',
         description:
           'When enabled, Android will accumulate updates in rawProps to reduce the number of mounting instructions for cascading re-renders.',
+        expectedReleaseValue: true,
+        purpose: 'experimentation',
+      },
+      ossReleaseStage: 'none',
+    },
+    enableAndroidAntialiasedBorderRadiusClipping: {
+      defaultValue: false,
+      metadata: {
+        dateAdded: '2025-11-14',
+        description:
+          'Enable antialiased border radius clipping for Android API 28 and below using manual masking with Porter-Duff compositing',
         expectedReleaseValue: true,
         purpose: 'experimentation',
       },
@@ -604,16 +604,6 @@ const definitions: FeatureFlagDefinitions = {
       },
       ossReleaseStage: 'none',
     },
-    enableVirtualViewClippingWithoutScrollViewClipping: {
-      defaultValue: true,
-      metadata: {
-        dateAdded: '2025-10-30',
-        description: 'Set clipping to drawingRect of ScrollView.',
-        expectedReleaseValue: true,
-        purpose: 'experimentation',
-      },
-      ossReleaseStage: 'none',
-    },
     enableVirtualViewContainerStateExperimental: {
       defaultValue: false,
       metadata: {
@@ -784,11 +774,41 @@ const definitions: FeatureFlagDefinitions = {
       },
       ossReleaseStage: 'none',
     },
+    shouldResetClickableWhenRecyclingView: {
+      defaultValue: true,
+      metadata: {
+        description:
+          'Reset isClickable to false when recycling views on Android to avoid accessibility tools finding views with incorrect state after recycling.',
+        expectedReleaseValue: true,
+        purpose: 'release',
+      },
+      ossReleaseStage: 'none',
+    },
+    shouldResetOnClickListenerWhenRecyclingView: {
+      defaultValue: true,
+      metadata: {
+        description:
+          'Reset OnClickListener to null when recycling views on Android to avoid accessibility tools finding views with incorrect state after recycling.',
+        expectedReleaseValue: true,
+        purpose: 'release',
+      },
+      ossReleaseStage: 'none',
+    },
     shouldSetEnabledBasedOnAccessibilityState: {
       defaultValue: true,
       metadata: {
         description:
           'Fix BaseViewManager to properly set view.setEnabled() based on accessibilityState.disabled.',
+        expectedReleaseValue: true,
+        purpose: 'release',
+      },
+      ossReleaseStage: 'none',
+    },
+    shouldSetIsClickableByDefault: {
+      defaultValue: false,
+      metadata: {
+        description:
+          'Sets isClickable=true by default on all React Native views on Android to improve UI harvesting detection while maintaining focusable=false to preserve expected behavior.',
         expectedReleaseValue: true,
         purpose: 'release',
       },

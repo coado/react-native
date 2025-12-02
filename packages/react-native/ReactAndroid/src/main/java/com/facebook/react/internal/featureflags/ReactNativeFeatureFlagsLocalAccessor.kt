@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<bd86cec4dcf659b9586aeee1c141963c>>
+ * @generated SignedSource<<ceaebd9c6453b8d6a44e5d45343e0ba4>>
  */
 
 /**
@@ -29,7 +29,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var cxxNativeAnimatedEnabledCache: Boolean? = null
   private var cxxNativeAnimatedRemoveJsSyncCache: Boolean? = null
   private var disableEarlyViewCommandExecutionCache: Boolean? = null
-  private var disableFabricCommitInCXXAnimatedCache: Boolean? = null
   private var disableImageViewPreallocationAndroidCache: Boolean? = null
   private var disableMountItemReorderingAndroidCache: Boolean? = null
   private var disableOldAndroidAttachmentMetricsWorkaroundsCache: Boolean? = null
@@ -38,6 +37,7 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var disableViewPreallocationAndroidCache: Boolean? = null
   private var enableAccessibilityOrderCache: Boolean? = null
   private var enableAccumulatedUpdatesInRawPropsAndroidCache: Boolean? = null
+  private var enableAndroidAntialiasedBorderRadiusClippingCache: Boolean? = null
   private var enableAndroidLinearTextCache: Boolean? = null
   private var enableAndroidTextMeasurementOptimizationsCache: Boolean? = null
   private var enableBridgelessArchitectureCache: Boolean? = null
@@ -76,7 +76,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var enableViewRecyclingForScrollViewCache: Boolean? = null
   private var enableViewRecyclingForTextCache: Boolean? = null
   private var enableViewRecyclingForViewCache: Boolean? = null
-  private var enableVirtualViewClippingWithoutScrollViewClippingCache: Boolean? = null
   private var enableVirtualViewContainerStateExperimentalCache: Boolean? = null
   private var enableVirtualViewDebugFeaturesCache: Boolean? = null
   private var enableVirtualViewRenderStateCache: Boolean? = null
@@ -93,7 +92,10 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
   private var preparedTextCacheSizeCache: Double? = null
   private var preventShadowTreeCommitExhaustionCache: Boolean? = null
   private var shouldPressibilityUseW3CPointerEventsForHoverCache: Boolean? = null
+  private var shouldResetClickableWhenRecyclingViewCache: Boolean? = null
+  private var shouldResetOnClickListenerWhenRecyclingViewCache: Boolean? = null
   private var shouldSetEnabledBasedOnAccessibilityStateCache: Boolean? = null
+  private var shouldSetIsClickableByDefaultCache: Boolean? = null
   private var shouldTriggerResponderTransferOnScrollAndroidCache: Boolean? = null
   private var skipActivityIdentityAssertionOnHostPauseCache: Boolean? = null
   private var traceTurboModulePromiseRejectionsOnAndroidCache: Boolean? = null
@@ -159,16 +161,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
       cached = currentProvider.disableEarlyViewCommandExecution()
       accessedFeatureFlags.add("disableEarlyViewCommandExecution")
       disableEarlyViewCommandExecutionCache = cached
-    }
-    return cached
-  }
-
-  override fun disableFabricCommitInCXXAnimated(): Boolean {
-    var cached = disableFabricCommitInCXXAnimatedCache
-    if (cached == null) {
-      cached = currentProvider.disableFabricCommitInCXXAnimated()
-      accessedFeatureFlags.add("disableFabricCommitInCXXAnimated")
-      disableFabricCommitInCXXAnimatedCache = cached
     }
     return cached
   }
@@ -249,6 +241,16 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
       cached = currentProvider.enableAccumulatedUpdatesInRawPropsAndroid()
       accessedFeatureFlags.add("enableAccumulatedUpdatesInRawPropsAndroid")
       enableAccumulatedUpdatesInRawPropsAndroidCache = cached
+    }
+    return cached
+  }
+
+  override fun enableAndroidAntialiasedBorderRadiusClipping(): Boolean {
+    var cached = enableAndroidAntialiasedBorderRadiusClippingCache
+    if (cached == null) {
+      cached = currentProvider.enableAndroidAntialiasedBorderRadiusClipping()
+      accessedFeatureFlags.add("enableAndroidAntialiasedBorderRadiusClipping")
+      enableAndroidAntialiasedBorderRadiusClippingCache = cached
     }
     return cached
   }
@@ -633,16 +635,6 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
     return cached
   }
 
-  override fun enableVirtualViewClippingWithoutScrollViewClipping(): Boolean {
-    var cached = enableVirtualViewClippingWithoutScrollViewClippingCache
-    if (cached == null) {
-      cached = currentProvider.enableVirtualViewClippingWithoutScrollViewClipping()
-      accessedFeatureFlags.add("enableVirtualViewClippingWithoutScrollViewClipping")
-      enableVirtualViewClippingWithoutScrollViewClippingCache = cached
-    }
-    return cached
-  }
-
   override fun enableVirtualViewContainerStateExperimental(): Boolean {
     var cached = enableVirtualViewContainerStateExperimentalCache
     if (cached == null) {
@@ -803,12 +795,42 @@ internal class ReactNativeFeatureFlagsLocalAccessor : ReactNativeFeatureFlagsAcc
     return cached
   }
 
+  override fun shouldResetClickableWhenRecyclingView(): Boolean {
+    var cached = shouldResetClickableWhenRecyclingViewCache
+    if (cached == null) {
+      cached = currentProvider.shouldResetClickableWhenRecyclingView()
+      accessedFeatureFlags.add("shouldResetClickableWhenRecyclingView")
+      shouldResetClickableWhenRecyclingViewCache = cached
+    }
+    return cached
+  }
+
+  override fun shouldResetOnClickListenerWhenRecyclingView(): Boolean {
+    var cached = shouldResetOnClickListenerWhenRecyclingViewCache
+    if (cached == null) {
+      cached = currentProvider.shouldResetOnClickListenerWhenRecyclingView()
+      accessedFeatureFlags.add("shouldResetOnClickListenerWhenRecyclingView")
+      shouldResetOnClickListenerWhenRecyclingViewCache = cached
+    }
+    return cached
+  }
+
   override fun shouldSetEnabledBasedOnAccessibilityState(): Boolean {
     var cached = shouldSetEnabledBasedOnAccessibilityStateCache
     if (cached == null) {
       cached = currentProvider.shouldSetEnabledBasedOnAccessibilityState()
       accessedFeatureFlags.add("shouldSetEnabledBasedOnAccessibilityState")
       shouldSetEnabledBasedOnAccessibilityStateCache = cached
+    }
+    return cached
+  }
+
+  override fun shouldSetIsClickableByDefault(): Boolean {
+    var cached = shouldSetIsClickableByDefaultCache
+    if (cached == null) {
+      cached = currentProvider.shouldSetIsClickableByDefault()
+      accessedFeatureFlags.add("shouldSetIsClickableByDefault")
+      shouldSetIsClickableByDefaultCache = cached
     }
     return cached
   }

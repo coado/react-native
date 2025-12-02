@@ -410,7 +410,6 @@ typedef struct {
         .jsInvoker = _jsInvoker,
         .nativeMethodCallInvoker = nativeMethodCallInvoker,
         .isSyncModule = methodQueue == RCTJSThread,
-        .shouldVoidMethodsExecuteSync = (bool)RCTTurboModuleSyncVoidMethodsEnabled(),
     };
 
     auto turboModule = [(id<RCTTurboModule>)module getTurboModule:params];
@@ -472,7 +471,6 @@ typedef struct {
       .jsInvoker = _jsInvoker,
       .nativeMethodCallInvoker = std::move(nativeMethodCallInvoker),
       .isSyncModule = methodQueue == RCTJSThread,
-      .shouldVoidMethodsExecuteSync = (bool)RCTTurboModuleSyncVoidMethodsEnabled(),
   };
 
   auto turboModule = std::make_shared<ObjCInteropTurboModule>(params);
