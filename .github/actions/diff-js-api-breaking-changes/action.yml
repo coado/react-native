@@ -3,10 +3,6 @@ description: Check for breaking changes in the public React Native JS API
 runs:
   using: composite
   steps:
-    - name: Setup Node.js
-      uses: ./.github/actions/setup-node
-    - name: Run yarn install
-      uses: ./.github/actions/yarn-install
     - name: Checkout PR branch
       uses: actions/checkout@v3
       with:

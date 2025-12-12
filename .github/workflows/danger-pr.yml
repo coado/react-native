@@ -18,10 +18,10 @@ jobs:
     if: github.repository == 'coado/react-native'
     steps:
       - uses: actions/checkout@v4
-      - name: Go up to repo root
-        run: cd ..
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
+        with:
+          node-version: '22.14.0'
       - name: Run yarn install
         uses: ./.github/actions/yarn-install
       - name: Check dir
