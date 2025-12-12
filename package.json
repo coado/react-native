@@ -45,6 +45,9 @@
     "private/*",
     "!private/helloworld"
   ],
+  "dependencies": {
+   "metro-babel-register": "^0.83.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
@@ -100,7 +103,6 @@
     "markdownlint-cli2": "^0.17.2",
     "markdownlint-rule-relative-links": "^3.0.0",
     "memfs": "^4.38.2",
-    "metro-babel-register": "^0.83.3",
     "metro-transform-plugins": "^0.83.3",
     "micromatch": "^4.0.4",
     "node-fetch": "^2.2.0",
