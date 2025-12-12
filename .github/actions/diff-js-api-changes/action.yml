@@ -4,6 +4,7 @@ runs:
   using: composite
   steps:
     - name: Get merge base commit with main
+      shell: bash
       id: merge_base
       run: |
         git fetch origin ${{ github.event.pull_request.head.sha }} --depth=100
@@ -11,6 +12,7 @@ runs:
         echo "merge_base=$BASE" >> $GITHUB_OUTPUT
 
     - name: Fetch snapshots from PR head and merge base
+      shell: bash
       env:
         SCRATCH_DIR: ${{ runner.temp }}/diff-js-api-changes
       run: |
@@ -23,6 +25,7 @@ runs:
           || echo "" > $SCRATCH_DIR/ReactNativeApi-after.d.ts
 
     - name: Run breaking change detection
+      shell: bash
       env:
         SCRATCH_DIR: ${{ runner.temp }}/diff-js-api-changes
       run: |
