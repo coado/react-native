@@ -1,7 +1,7 @@
 name: Run Danger on PR
 
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, edited, reopened, synchronize]
 
 permissions:
@@ -15,15 +15,15 @@ permissions:
 jobs:
   danger:
     runs-on: ubuntu-latest
-    if: github.repository == 'facebook/react-native'
+    if: github.repository == 'coado/react-native'
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
       - name: Run yarn install
         uses: ./.github/actions/yarn-install
-      - name: Run diff-js-api-breaking-changes
-        uses: ./.github/actions/diff-js-api-breaking-changes
+      - name: Run diff-js-api-changes
+        uses: ./.github/actions/diff-js-api-changes
       - name: Danger
         run: yarn danger ci --use-github-checks --failOnErrors
         working-directory: private/react-native-bots
