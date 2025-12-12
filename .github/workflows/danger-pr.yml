@@ -20,12 +20,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
-        with:
-          node-version: '24'
+        # with:
+        #   node-version: '24'
       - name: Run yarn install
         uses: ./.github/actions/yarn-install
       - name: Check dir
         run: pwd
+      - name: Check node_modules
+        run: ls -la node_modules
       - name: Run diff-js-api-breaking-changes
         uses: ./.github/actions/diff-js-api-breaking-changes
       # - name: Danger
