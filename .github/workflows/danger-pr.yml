@@ -22,8 +22,8 @@ jobs:
         uses: ./.github/actions/setup-node
       - name: Run yarn install
         uses: ./.github/actions/yarn-install
-      - name: Check packages
-        run: npm ls
+      - name: Check dir
+        run: pwd
       - name: Run diff-js-api-breaking-changes
         uses: ./.github/actions/diff-js-api-breaking-changes
       # - name: Danger
