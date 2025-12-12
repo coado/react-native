@@ -32,10 +32,6 @@ runs:
         git show ${{ steps.merge_base.outputs.merge_base }}:packages/react-native/ReactNativeApi.d.ts > $SCRATCH_DIR/ReactNativeApi-before.d.ts \
           || echo "" > $SCRATCH_DIR/ReactNativeApi-before.d.ts
 
-    - name: Check dir
-      shell: bash
-      run: pwd
-
     - name: Run breaking change detection
       shell: bash
       env:
