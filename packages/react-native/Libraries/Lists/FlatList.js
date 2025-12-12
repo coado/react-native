@@ -150,7 +150,7 @@ type OptionalFlatListProps<ItemT> = {
   /**
    * Enable an optimization to memoize the item renderer to prevent unnecessary rerenders.
    */
-  strictMode?: boolean,
+  // strictMode?: boolean,
 };
 
 /**
