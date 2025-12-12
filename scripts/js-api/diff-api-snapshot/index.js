@@ -9,6 +9,7 @@
  * @oncall react_native
  */
 
+require('flow-api-translator');
 require('../../shared/babelRegister').registerForScript();
 
 const {diffApiSnapshot} = require('./diffApiSnapshot');
