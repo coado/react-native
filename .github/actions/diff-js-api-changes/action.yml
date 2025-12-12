@@ -7,6 +7,7 @@ runs:
       shell: bash
       id: merge_base
       run: |
+        git fetch origin main --depth=0
         git fetch origin ${{ github.event.pull_request.head.sha }} --depth=100
         BASE=$(git merge-base ${{ github.event.pull_request.head.sha }} origin/main)
         echo "merge_base=$BASE" >> $GITHUB_OUTPUT
