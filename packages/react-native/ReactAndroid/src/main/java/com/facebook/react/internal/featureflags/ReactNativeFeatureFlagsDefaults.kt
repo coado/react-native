@@ -27,7 +27,7 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun cdpInteractionMetricsEnabled(): Boolean = false
 
-  override fun cxxNativeAnimatedEnabled(): Boolean = false
+  override fun cxxNativeAnimatedEnabled(): Boolean = true
 
   override fun disableEarlyViewCommandExecution(): Boolean = false
 
@@ -181,7 +181,7 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun useShadowNodeStateOnClone(): Boolean = true
 
-  override fun useSharedAnimatedBackend(): Boolean = false
+  override fun useSharedAnimatedBackend(): Boolean = true
 
   override fun useTraitHiddenOnAndroid(): Boolean = false
 

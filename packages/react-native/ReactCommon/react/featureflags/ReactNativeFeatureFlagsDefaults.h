@@ -36,7 +36,7 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool cxxNativeAnimatedEnabled() override {
-    return false;
+    return true;
   }
 
   bool disableEarlyViewCommandExecution() override {
@@ -344,7 +344,7 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool useSharedAnimatedBackend() override {
-    return false;
+    return true;
   }
 
   bool useTraitHiddenOnAndroid() override {
