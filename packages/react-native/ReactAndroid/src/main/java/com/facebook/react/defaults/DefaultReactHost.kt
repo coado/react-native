@@ -21,6 +21,7 @@ import com.facebook.react.fabric.ComponentFactory
 import com.facebook.react.runtime.BindingsInstaller
 import com.facebook.react.runtime.JSRuntimeFactory
 import com.facebook.react.runtime.ReactHostImpl
+import com.facebook.react.animated.AnimatedCxxReactPackage
 import com.facebook.react.runtime.cxxreactpackage.CxxReactPackage
 import com.facebook.react.runtime.hermes.HermesInstance
 import java.lang.Exception
@@ -85,6 +86,7 @@ public object DefaultReactHost {
           }
       val defaultTmmDelegateBuilder = DefaultTurboModuleManagerDelegate.Builder()
       cxxReactPackageProviders.forEach { defaultTmmDelegateBuilder.addCxxReactPackage(it) }
+      defaultTmmDelegateBuilder.addCxxReactPackage { context -> AnimatedCxxReactPackage(context) }
       val defaultReactHostDelegate =
           DefaultReactHostDelegate(
               jsMainModulePath = jsMainModulePath,
