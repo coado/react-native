@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<5a2e55d5f195183e708dd802dcafcd47>>
+ * @generated SignedSource<<c2abc99478f9cf80ba8880d31c55d25f>>
  */
 
 /**
@@ -37,10 +37,6 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
 
   bool cxxNativeAnimatedEnabled() override {
     return true;
-  }
-
-  bool cxxNativeAnimatedRemoveJsSync() override {
-    return false;
   }
 
   bool disableEarlyViewCommandExecution() override {
@@ -196,7 +192,7 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool enableNetworkEventReporting() override {
-    return false;
+    return true;
   }
 
   bool enablePreparedTextLayout() override {
@@ -251,11 +247,11 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return false;
   }
 
-  bool enableWebPerformanceAPIsByDefault() override {
-    return true;
+  bool fixMappingOfEventPrioritiesBetweenFabricAndReact() override {
+    return false;
   }
 
-  bool fixMappingOfEventPrioritiesBetweenFabricAndReact() override {
+  bool fixTextClippingAndroid15useBoundsForWidth() override {
     return false;
   }
 
@@ -268,7 +264,7 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool fuseboxNetworkInspectionEnabled() override {
-    return false;
+    return true;
   }
 
   bool hideOffscreenVirtualViewsOnIOS() override {
@@ -339,24 +335,12 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return true;
   }
 
-  bool useNativeEqualsInNativeReadableArrayAndroid() override {
-    return true;
-  }
-
-  bool useNativeTransformHelperAndroid() override {
-    return true;
-  }
-
   bool useNativeViewConfigsInBridgelessMode() override {
     return false;
   }
 
-  bool useRawPropsJsiValue() override {
-    return true;
-  }
-
   bool useShadowNodeStateOnClone() override {
-    return false;
+    return true;
   }
 
   bool useSharedAnimatedBackend() override {

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<2e69f1b64e18567abff05a1f8bc7014d>>
+ * @generated SignedSource<<1ee723a105e7d14a01f92469bad94888>>
  */
 
 /**
@@ -47,12 +47,6 @@ public object ReactNativeFeatureFlags {
    */
   @JvmStatic
   public fun cxxNativeAnimatedEnabled(): Boolean = accessor.cxxNativeAnimatedEnabled()
-
-  /**
-   * Removes JS sync at end of native animation
-   */
-  @JvmStatic
-  public fun cxxNativeAnimatedRemoveJsSync(): Boolean = accessor.cxxNativeAnimatedRemoveJsSync()
 
   /**
    * Dispatch view commands in mount item order.
@@ -367,16 +361,16 @@ public object ReactNativeFeatureFlags {
   public fun enableVirtualViewWindowFocusDetection(): Boolean = accessor.enableVirtualViewWindowFocusDetection()
 
   /**
-   * Enable Web Performance APIs (Performance Timeline, User Timings, etc.) by default.
-   */
-  @JvmStatic
-  public fun enableWebPerformanceAPIsByDefault(): Boolean = accessor.enableWebPerformanceAPIsByDefault()
-
-  /**
    * Uses the default event priority instead of the discreet event priority by default when dispatching events from Fabric to React.
    */
   @JvmStatic
   public fun fixMappingOfEventPrioritiesBetweenFabricAndReact(): Boolean = accessor.fixMappingOfEventPrioritiesBetweenFabricAndReact()
+
+  /**
+   * Fix text clipping starting in Android 15 due to usage of useBoundsForWidth
+   */
+  @JvmStatic
+  public fun fixTextClippingAndroid15useBoundsForWidth(): Boolean = accessor.fixTextClippingAndroid15useBoundsForWidth()
 
   /**
    * Enable system assertion validating that Fusebox is configured with a single host. When set, the CDP backend will dynamically disable features (Perf and Network) in the event that multiple hosts are registered (undefined behaviour), and broadcast this over `ReactNativeApplication.systemStateChanged`.
@@ -499,28 +493,10 @@ public object ReactNativeFeatureFlags {
   public fun useFabricInterop(): Boolean = accessor.useFabricInterop()
 
   /**
-   * Use a native implementation of equals in NativeReadableArray.
-   */
-  @JvmStatic
-  public fun useNativeEqualsInNativeReadableArrayAndroid(): Boolean = accessor.useNativeEqualsInNativeReadableArrayAndroid()
-
-  /**
-   * Use a native implementation of TransformHelper
-   */
-  @JvmStatic
-  public fun useNativeTransformHelperAndroid(): Boolean = accessor.useNativeTransformHelperAndroid()
-
-  /**
    * When enabled, the native view configs are used in bridgeless mode.
    */
   @JvmStatic
   public fun useNativeViewConfigsInBridgelessMode(): Boolean = accessor.useNativeViewConfigsInBridgelessMode()
-
-  /**
-   * Instead of using folly::dynamic as internal representation in RawProps and RawValue, use jsi::Value
-   */
-  @JvmStatic
-  public fun useRawPropsJsiValue(): Boolean = accessor.useRawPropsJsiValue()
 
   /**
    * Use the state stored on the source shadow node when cloning it instead of reading in the most recent state on the shadow node family.

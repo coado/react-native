@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<db573411b908b6d2ca5a8dad88866535>>
+ * @generated SignedSource<<c3f2ab59cf1df181a7fa7a731d73bbea>>
  */
 
 /**
@@ -70,15 +70,6 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     }
 
     return ReactNativeFeatureFlagsDefaults::cxxNativeAnimatedEnabled();
-  }
-
-  bool cxxNativeAnimatedRemoveJsSync() override {
-    auto value = values_["cxxNativeAnimatedRemoveJsSync"];
-    if (!value.isNull()) {
-      return value.getBool();
-    }
-
-    return ReactNativeFeatureFlagsDefaults::cxxNativeAnimatedRemoveJsSync();
   }
 
   bool disableEarlyViewCommandExecution() override {
@@ -549,15 +540,6 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     return ReactNativeFeatureFlagsDefaults::enableVirtualViewWindowFocusDetection();
   }
 
-  bool enableWebPerformanceAPIsByDefault() override {
-    auto value = values_["enableWebPerformanceAPIsByDefault"];
-    if (!value.isNull()) {
-      return value.getBool();
-    }
-
-    return ReactNativeFeatureFlagsDefaults::enableWebPerformanceAPIsByDefault();
-  }
-
   bool fixMappingOfEventPrioritiesBetweenFabricAndReact() override {
     auto value = values_["fixMappingOfEventPrioritiesBetweenFabricAndReact"];
     if (!value.isNull()) {
@@ -565,6 +547,15 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     }
 
     return ReactNativeFeatureFlagsDefaults::fixMappingOfEventPrioritiesBetweenFabricAndReact();
+  }
+
+  bool fixTextClippingAndroid15useBoundsForWidth() override {
+    auto value = values_["fixTextClippingAndroid15useBoundsForWidth"];
+    if (!value.isNull()) {
+      return value.getBool();
+    }
+
+    return ReactNativeFeatureFlagsDefaults::fixTextClippingAndroid15useBoundsForWidth();
   }
 
   bool fuseboxAssertSingleHostState() override {
@@ -747,24 +738,6 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     return ReactNativeFeatureFlagsDefaults::useFabricInterop();
   }
 
-  bool useNativeEqualsInNativeReadableArrayAndroid() override {
-    auto value = values_["useNativeEqualsInNativeReadableArrayAndroid"];
-    if (!value.isNull()) {
-      return value.getBool();
-    }
-
-    return ReactNativeFeatureFlagsDefaults::useNativeEqualsInNativeReadableArrayAndroid();
-  }
-
-  bool useNativeTransformHelperAndroid() override {
-    auto value = values_["useNativeTransformHelperAndroid"];
-    if (!value.isNull()) {
-      return value.getBool();
-    }
-
-    return ReactNativeFeatureFlagsDefaults::useNativeTransformHelperAndroid();
-  }
-
   bool useNativeViewConfigsInBridgelessMode() override {
     auto value = values_["useNativeViewConfigsInBridgelessMode"];
     if (!value.isNull()) {
@@ -772,15 +745,6 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     }
 
     return ReactNativeFeatureFlagsDefaults::useNativeViewConfigsInBridgelessMode();
-  }
-
-  bool useRawPropsJsiValue() override {
-    auto value = values_["useRawPropsJsiValue"];
-    if (!value.isNull()) {
-      return value.getBool();
-    }
-
-    return ReactNativeFeatureFlagsDefaults::useRawPropsJsiValue();
   }
 
   bool useShadowNodeStateOnClone() override {

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<e3acef3e3c9b032fce0902019fa6ff3f>>
+ * @generated SignedSource<<7583b49b28e083ae22b538fdce205d43>>
  */
 
 /**
@@ -53,11 +53,6 @@ class ReactNativeFeatureFlags {
    * Use a C++ implementation of Native Animated instead of the platform implementation.
    */
   RN_EXPORT static bool cxxNativeAnimatedEnabled();
-
-  /**
-   * Removes JS sync at end of native animation
-   */
-  RN_EXPORT static bool cxxNativeAnimatedRemoveJsSync();
 
   /**
    * Dispatch view commands in mount item order.
@@ -320,14 +315,14 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool enableVirtualViewWindowFocusDetection();
 
   /**
-   * Enable Web Performance APIs (Performance Timeline, User Timings, etc.) by default.
-   */
-  RN_EXPORT static bool enableWebPerformanceAPIsByDefault();
-
-  /**
    * Uses the default event priority instead of the discreet event priority by default when dispatching events from Fabric to React.
    */
   RN_EXPORT static bool fixMappingOfEventPrioritiesBetweenFabricAndReact();
+
+  /**
+   * Fix text clipping starting in Android 15 due to usage of useBoundsForWidth
+   */
+  RN_EXPORT static bool fixTextClippingAndroid15useBoundsForWidth();
 
   /**
    * Enable system assertion validating that Fusebox is configured with a single host. When set, the CDP backend will dynamically disable features (Perf and Network) in the event that multiple hosts are registered (undefined behaviour), and broadcast this over `ReactNativeApplication.systemStateChanged`.
@@ -430,24 +425,9 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool useFabricInterop();
 
   /**
-   * Use a native implementation of equals in NativeReadableArray.
-   */
-  RN_EXPORT static bool useNativeEqualsInNativeReadableArrayAndroid();
-
-  /**
-   * Use a native implementation of TransformHelper
-   */
-  RN_EXPORT static bool useNativeTransformHelperAndroid();
-
-  /**
    * When enabled, the native view configs are used in bridgeless mode.
    */
   RN_EXPORT static bool useNativeViewConfigsInBridgelessMode();
-
-  /**
-   * Instead of using folly::dynamic as internal representation in RawProps and RawValue, use jsi::Value
-   */
-  RN_EXPORT static bool useRawPropsJsiValue();
 
   /**
    * Use the state stored on the source shadow node when cloning it instead of reading in the most recent state on the shadow node family.

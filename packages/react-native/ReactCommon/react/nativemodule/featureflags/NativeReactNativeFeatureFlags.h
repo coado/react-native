@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<a554f3307c6c06e771f56de187fbed93>>
+ * @generated SignedSource<<f17424885412e2216993730b5392176e>>
  */
 
 /**
@@ -41,8 +41,6 @@ class NativeReactNativeFeatureFlags
   bool cdpInteractionMetricsEnabled(jsi::Runtime& runtime);
 
   bool cxxNativeAnimatedEnabled(jsi::Runtime& runtime);
-
-  bool cxxNativeAnimatedRemoveJsSync(jsi::Runtime& runtime);
 
   bool disableEarlyViewCommandExecution(jsi::Runtime& runtime);
 
@@ -148,9 +146,9 @@ class NativeReactNativeFeatureFlags
 
   bool enableVirtualViewWindowFocusDetection(jsi::Runtime& runtime);
 
-  bool enableWebPerformanceAPIsByDefault(jsi::Runtime& runtime);
-
   bool fixMappingOfEventPrioritiesBetweenFabricAndReact(jsi::Runtime& runtime);
+
+  bool fixTextClippingAndroid15useBoundsForWidth(jsi::Runtime& runtime);
 
   bool fuseboxAssertSingleHostState(jsi::Runtime& runtime);
 
@@ -192,13 +190,7 @@ class NativeReactNativeFeatureFlags
 
   bool useFabricInterop(jsi::Runtime& runtime);
 
-  bool useNativeEqualsInNativeReadableArrayAndroid(jsi::Runtime& runtime);
-
-  bool useNativeTransformHelperAndroid(jsi::Runtime& runtime);
-
   bool useNativeViewConfigsInBridgelessMode(jsi::Runtime& runtime);
-
-  bool useRawPropsJsiValue(jsi::Runtime& runtime);
 
   bool useShadowNodeStateOnClone(jsi::Runtime& runtime);
 

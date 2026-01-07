@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<f055563fdc2085f73eb43a28cd6749af>>
+ * @generated SignedSource<<5f72ef123c1f70ef6b922c7d74b00ba3>>
  */
 
 /**
@@ -28,7 +28,6 @@ class ReactNativeFeatureFlagsProvider {
   virtual bool commonTestFlag() = 0;
   virtual bool cdpInteractionMetricsEnabled() = 0;
   virtual bool cxxNativeAnimatedEnabled() = 0;
-  virtual bool cxxNativeAnimatedRemoveJsSync() = 0;
   virtual bool disableEarlyViewCommandExecution() = 0;
   virtual bool disableImageViewPreallocationAndroid() = 0;
   virtual bool disableMountItemReorderingAndroid() = 0;
@@ -81,8 +80,8 @@ class ReactNativeFeatureFlagsProvider {
   virtual bool enableVirtualViewDebugFeatures() = 0;
   virtual bool enableVirtualViewRenderState() = 0;
   virtual bool enableVirtualViewWindowFocusDetection() = 0;
-  virtual bool enableWebPerformanceAPIsByDefault() = 0;
   virtual bool fixMappingOfEventPrioritiesBetweenFabricAndReact() = 0;
+  virtual bool fixTextClippingAndroid15useBoundsForWidth() = 0;
   virtual bool fuseboxAssertSingleHostState() = 0;
   virtual bool fuseboxEnabledRelease() = 0;
   virtual bool fuseboxNetworkInspectionEnabled() = 0;
@@ -103,10 +102,7 @@ class ReactNativeFeatureFlagsProvider {
   virtual bool updateRuntimeShadowNodeReferencesOnCommit() = 0;
   virtual bool useAlwaysAvailableJSErrorHandling() = 0;
   virtual bool useFabricInterop() = 0;
-  virtual bool useNativeEqualsInNativeReadableArrayAndroid() = 0;
-  virtual bool useNativeTransformHelperAndroid() = 0;
   virtual bool useNativeViewConfigsInBridgelessMode() = 0;
-  virtual bool useRawPropsJsiValue() = 0;
   virtual bool useShadowNodeStateOnClone() = 0;
   virtual bool useSharedAnimatedBackend() = 0;
   virtual bool useTraitHiddenOnAndroid() = 0;

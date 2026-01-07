@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<c94da1f2b880dbcbd02b2ccc1da0c387>>
+ * @generated SignedSource<<9eaa1bfee243767cc98b9477fc391c37>>
  */
 
 /**
@@ -33,8 +33,6 @@ public object ReactNativeFeatureFlagsCxxInterop {
   @DoNotStrip @JvmStatic public external fun cdpInteractionMetricsEnabled(): Boolean
 
   @DoNotStrip @JvmStatic public external fun cxxNativeAnimatedEnabled(): Boolean
-
-  @DoNotStrip @JvmStatic public external fun cxxNativeAnimatedRemoveJsSync(): Boolean
 
   @DoNotStrip @JvmStatic public external fun disableEarlyViewCommandExecution(): Boolean
 
@@ -140,9 +138,9 @@ public object ReactNativeFeatureFlagsCxxInterop {
 
   @DoNotStrip @JvmStatic public external fun enableVirtualViewWindowFocusDetection(): Boolean
 
-  @DoNotStrip @JvmStatic public external fun enableWebPerformanceAPIsByDefault(): Boolean
-
   @DoNotStrip @JvmStatic public external fun fixMappingOfEventPrioritiesBetweenFabricAndReact(): Boolean
+
+  @DoNotStrip @JvmStatic public external fun fixTextClippingAndroid15useBoundsForWidth(): Boolean
 
   @DoNotStrip @JvmStatic public external fun fuseboxAssertSingleHostState(): Boolean
 
@@ -184,13 +182,7 @@ public object ReactNativeFeatureFlagsCxxInterop {
 
   @DoNotStrip @JvmStatic public external fun useFabricInterop(): Boolean
 
-  @DoNotStrip @JvmStatic public external fun useNativeEqualsInNativeReadableArrayAndroid(): Boolean
-
-  @DoNotStrip @JvmStatic public external fun useNativeTransformHelperAndroid(): Boolean
-
   @DoNotStrip @JvmStatic public external fun useNativeViewConfigsInBridgelessMode(): Boolean
-
-  @DoNotStrip @JvmStatic public external fun useRawPropsJsiValue(): Boolean
 
   @DoNotStrip @JvmStatic public external fun useShadowNodeStateOnClone(): Boolean
 

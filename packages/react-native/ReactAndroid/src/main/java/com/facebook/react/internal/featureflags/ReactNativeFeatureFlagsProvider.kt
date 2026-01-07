@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<91441ffa16383203cf8ef82e1edf4451>>
+ * @generated SignedSource<<d301449edc583e49d5660ea5d5f80929>>
  */
 
 /**
@@ -28,8 +28,6 @@ public interface ReactNativeFeatureFlagsProvider {
   @DoNotStrip public fun cdpInteractionMetricsEnabled(): Boolean
 
   @DoNotStrip public fun cxxNativeAnimatedEnabled(): Boolean
-
-  @DoNotStrip public fun cxxNativeAnimatedRemoveJsSync(): Boolean
 
   @DoNotStrip public fun disableEarlyViewCommandExecution(): Boolean
 
@@ -135,9 +133,9 @@ public interface ReactNativeFeatureFlagsProvider {
 
   @DoNotStrip public fun enableVirtualViewWindowFocusDetection(): Boolean
 
-  @DoNotStrip public fun enableWebPerformanceAPIsByDefault(): Boolean
-
   @DoNotStrip public fun fixMappingOfEventPrioritiesBetweenFabricAndReact(): Boolean
+
+  @DoNotStrip public fun fixTextClippingAndroid15useBoundsForWidth(): Boolean
 
   @DoNotStrip public fun fuseboxAssertSingleHostState(): Boolean
 
@@ -179,13 +177,7 @@ public interface ReactNativeFeatureFlagsProvider {
 
   @DoNotStrip public fun useFabricInterop(): Boolean
 
-  @DoNotStrip public fun useNativeEqualsInNativeReadableArrayAndroid(): Boolean
-
-  @DoNotStrip public fun useNativeTransformHelperAndroid(): Boolean
-
   @DoNotStrip public fun useNativeViewConfigsInBridgelessMode(): Boolean
-
-  @DoNotStrip public fun useRawPropsJsiValue(): Boolean
 
   @DoNotStrip public fun useShadowNodeStateOnClone(): Boolean
 

@@ -23,7 +23,7 @@ import connect from 'connect';
 import path from 'path';
 import serveStaticMiddleware from 'serve-static';
 
-type Options = $ReadOnly<{
+type Options = Readonly<{
   /**
    * The base URL to the dev server, as reachable from the machine on which
    * dev-middleware is hosted. Typically `http://localhost:${metroPort}`.
@@ -70,7 +70,7 @@ type Options = $ReadOnly<{
   unstable_trackInspectorProxyEventLoopPerf?: boolean,
 }>;
 
-type DevMiddlewareAPI = $ReadOnly<{
+type DevMiddlewareAPI = Readonly<{
   middleware: NextHandleFunction,
   websocketEndpoints: {[path: string]: ws$WebSocketServer},
 }>;
@@ -138,7 +138,7 @@ function getExperiments(config: ExperimentsConfig): Experiments {
   return {
     enableOpenDebuggerRedirect: config.enableOpenDebuggerRedirect ?? false,
     enableNetworkInspector: config.enableNetworkInspector ?? false,
-    enableStandaloneFuseboxShell: config.enableStandaloneFuseboxShell ?? false,
+    enableStandaloneFuseboxShell: config.enableStandaloneFuseboxShell ?? true,
   };
 }
 
