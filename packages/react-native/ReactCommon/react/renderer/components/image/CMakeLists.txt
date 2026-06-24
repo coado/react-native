@@ -30,3 +30,4 @@ target_link_libraries(rrc_image
 )
 target_compile_reactnative_options(rrc_image PRIVATE)
 target_compile_options(rrc_image PRIVATE -Wpedantic)
+
