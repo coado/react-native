@@ -167,16 +167,28 @@ val preparePrefab by
                           "../ReactCommon/react/renderer/components/image/",
                           "react/renderer/components/image/",
                       ),
+                      Pair(
+                          "../ReactCommon/react/renderer/components/image/React/",
+                          "React/",
+                      ),
                       // rrc_view
                       Pair(
                           "../ReactCommon/react/renderer/components/view/",
                           "react/renderer/components/view/",
+                      ),
+                      Pair(
+                          "../ReactCommon/react/renderer/components/view/React/",
+                          "React/",
                       ),
                       Pair("../ReactCommon/react/renderer/components/view/platform/android/", ""),
                       // rrc_root
                       Pair(
                           "../ReactCommon/react/renderer/components/root/",
                           "react/renderer/components/root/",
+                      ),
+                      Pair(
+                          "../ReactCommon/react/renderer/components/root/React/",
+                          "React/",
                       ),
                       // runtimeexecutor
                       Pair("../ReactCommon/runtimeexecutor/", ""),
@@ -190,6 +202,10 @@ val preparePrefab by
                       Pair(
                           "../ReactCommon/react/renderer/components/text/",
                           "react/renderer/components/text/",
+                      ),
+                      Pair(
+                          "../ReactCommon/react/renderer/components/text/React/",
+                          "React/",
                       ),
                       Pair(
                           "../ReactCommon/react/renderer/attributedstring",

@@ -34,3 +34,4 @@ target_link_libraries(rrc_progressbar
 )
 target_compile_reactnative_options(rrc_progressbar PRIVATE)
 target_compile_options(rrc_progressbar PRIVATE -Wpedantic)
+
