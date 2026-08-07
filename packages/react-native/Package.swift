@@ -948,6 +948,10 @@ extension Target {
         CXXSetting.headerSearchPath(relativeSearchPath(numOfSlash + 1, ".build/headers/React")),
       ]
 
+    // Every target built through this factory is React Native's own, so RN_BUILDING
+    // keeps the react/cxxstableapi guards inert for internal sources. cxxSettings are
+    // per-target and are not inherited by packages that depend on React, so this does
+    // not exempt consumers from the guards.
     let cxxSettings =
       [
         .unsafeFlags(["-std=c++20"]),
@@ -956,6 +960,7 @@ extension Target {
         .define("USE_HERMES", to: "1"),
         .define("RCT_REMOVE_LEGACY_ARCH", to: "1"),
         .define("HERMES_V1_ENABLED", to: "1"),
+        .define("RN_BUILDING", to: "1"),
       ] + defines + cxxCommonHeaderPaths
 
     return .target(
