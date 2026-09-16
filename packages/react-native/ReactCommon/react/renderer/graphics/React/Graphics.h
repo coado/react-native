@@ -55,10 +55,6 @@
 #include <react/renderer/graphics/fromRawValueShared.h>
 #include <react/renderer/graphics/rounding.h>
 
-#ifdef ANDROID
-#include <react/renderer/graphics/configurePlatformColorCacheInvalidationHook.h>
-#endif
-
 #if defined(__APPLE__) && defined(__OBJC__)
 #include <react/renderer/graphics/RCTPlatformColorUtils.h>
 #endif
