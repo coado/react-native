@@ -13,7 +13,7 @@ Map {
  */
 
 #include <react/renderer/components/ALL_PROP/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -147,7 +147,7 @@ Map {
  */
 
 #include <react/renderer/components/ALL_PROP_WITH_OPTIONAL_GEN/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -295,7 +295,7 @@ Map {
  */
 
 #include <react/renderer/components/ALL_PROP_WITH_OPTIONAL_OBJECT_GEN/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -443,8 +443,8 @@ Map {
  */
 
 #include <react/renderer/components/ARRAY_PROPS/Props.h>
+#include <React/Image.h>
 #include <React/View.h>
-#include <react/renderer/components/image/conversions.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -725,8 +725,8 @@ Map {
  */
 
 #include <react/renderer/components/ARRAY_PROPS_WITH_OPTIONAL_GEN/Props.h>
+#include <React/Image.h>
 #include <React/View.h>
-#include <react/renderer/components/image/conversions.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -892,8 +892,8 @@ Map {
  */
 
 #include <react/renderer/components/ARRAY_PROPS_WITH_OPTIONAL_OBJECT_GEN/Props.h>
+#include <React/Image.h>
 #include <React/View.h>
-#include <react/renderer/components/image/conversions.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -1813,7 +1813,7 @@ Map {
  */
 
 #include <react/renderer/components/IMAGE_PROP/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -2143,7 +2143,7 @@ Map {
  */
 
 #include <react/renderer/components/MULTI_NATIVE_PROP/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -2262,7 +2262,7 @@ Map {
  */
 
 #include <react/renderer/components/OBJECT_PROPS/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -2316,7 +2316,7 @@ Map {
  */
 
 #include <react/renderer/components/OBJECT_PROPS_WITH_OPTIONAL_GEN/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -2374,7 +2374,7 @@ Map {
  */
 
 #include <react/renderer/components/OBJECT_PROPS_WITH_OPTIONAL_OBJECT_GEN/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 

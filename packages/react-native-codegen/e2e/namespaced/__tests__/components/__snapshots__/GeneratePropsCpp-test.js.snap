@@ -13,8 +13,8 @@ Object {
  */
 
 #include <react/renderer/components/RNCodegenModuleFixtures/Props.h>
+#include <React/Image.h>
 #include <React/View.h>
-#include <react/renderer/components/image/conversions.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -590,7 +590,7 @@ Object {
  */
 
 #include <react/renderer/components/RNCodegenModuleFixtures/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -814,7 +814,7 @@ Object {
  */
 
 #include <react/renderer/components/RNCodegenModuleFixtures/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 
@@ -933,7 +933,7 @@ Object {
  */
 
 #include <react/renderer/components/RNCodegenModuleFixtures/Props.h>
-#include <react/renderer/components/image/conversions.h>
+#include <React/Image.h>
 #include <react/renderer/core/PropsParserContext.h>
 #include <react/renderer/core/propsConversions.h>
 

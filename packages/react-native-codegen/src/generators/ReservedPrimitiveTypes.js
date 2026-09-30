@@ -61,10 +61,8 @@ const RESERVED_TYPES: {readonly [ReservedPrimitiveName]: ReservedTypeMapping} =
     ImageSourcePrimitive: {
       cpp: {
         typeName: 'ImageSource',
-        localIncludes: ['#include <react/renderer/imagemanager/primitives.h>'],
-        conversionIncludes: [
-          '#include <react/renderer/components/image/conversions.h>',
-        ],
+        localIncludes: ['#include <React/ImageManager.h>'],
+        conversionIncludes: ['#include <React/Image.h>'],
       },
       java: {
         interfaceImports: ['import com.facebook.react.bridge.ReadableMap;'],
@@ -74,9 +72,7 @@ const RESERVED_TYPES: {readonly [ReservedPrimitiveName]: ReservedTypeMapping} =
     ImageRequestPrimitive: {
       cpp: {
         typeName: 'ImageRequest',
-        localIncludes: [
-          '#include <react/renderer/imagemanager/ImageRequest.h>',
-        ],
+        localIncludes: ['#include <React/ImageManager.h>'],
         conversionIncludes: [],
       },
       java: {
